@@ -5,7 +5,7 @@ import ExplorerPage from "./Pages/ExplorerPage";
 import { ExplorerProvider } from "../Contexts/ExplorerContext";
 
 export const ROUTE_LINKS = {
-  Transfer: "/transfer",
+  Transfer: "/",
   Explore: "/explore",
 };
 
