@@ -28,6 +28,8 @@ if (
   });
 }
 
+console.log(`NODE_ENV ${process.env.NODE_ENV}`);
+
 const App: React.FC<{}> = () => {
   const tokens = chainbridgeConfig.chains
     .filter((c) => c.type === "Ethereum")
