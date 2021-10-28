@@ -53,6 +53,12 @@ const useStyles = makeStyles(({ constants, palette, zIndex }: ITheme) => {
       marginRight: constants.generalUnit,
     },
     network: {},
+    rightWrapper: {
+      display: "flex",
+    },
+    link: {
+      paddingRight: 10,
+    },
   });
 });
 
@@ -78,21 +84,33 @@ const AppHeader: React.FC<IAppHeader> = () => {
           </Typography>
         </NavLink>
       </div>
-      <section className={classes.state}>
-        {!isReady ? (
-          <Typography variant="h5">No wallet connected</Typography>
-        ) : (
-          <>
-            <div className={classes.indicator}></div>
-            <Typography variant="h5" className={classes.address}>
-              {address && shortenAddress(address)}
-            </Typography>
-            <Typography variant="h5" className={classes.address}>
-              connected to <strong>{homeConfig?.name}</strong>
-            </Typography>
-          </>
-        )}
-      </section>
+      <div className={classes.rightWrapper}>
+        <section className={classes.link}>
+          <a
+            style={{ textDecoration: "none" }}
+            href="https://cere-network.gitbook.io/cere-network/mainnet/network-details"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Typography variant="h5">Cere Network Homepage</Typography>
+          </a>
+        </section>
+        <section className={classes.state}>
+          {!isReady ? (
+            <Typography variant="h5">No wallet connected</Typography>
+          ) : (
+            <>
+              <div className={classes.indicator}></div>
+              <Typography variant="h5" className={classes.address}>
+                {address && shortenAddress(address)}
+              </Typography>
+              <Typography variant="h5" className={classes.address}>
+                connected to <strong>{homeConfig?.name}</strong>
+              </Typography>
+            </>
+          )}
+        </section>
+      </div>
     </header>
   );
 };
