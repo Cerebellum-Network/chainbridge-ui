@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { NavLink, Typography } from "@chainsafe/common-components";
 import { shortenAddress } from "../Utils/Helpers";
 import { useChainbridge } from "../Contexts/ChainbridgeContext";
-import CereLogo from "../media/Icons/cere-icon.svg";
+import CereLogo from "../media/Icons/cere-icon.png";
 
 const useStyles = makeStyles(({ constants, palette, zIndex }: ITheme) => {
   return createStyles({
@@ -59,6 +59,9 @@ const useStyles = makeStyles(({ constants, palette, zIndex }: ITheme) => {
     link: {
       paddingRight: 10,
     },
+    title: {
+      paddingLeft: 10,
+    },
   });
 });
 
@@ -76,7 +79,11 @@ const AppHeader: React.FC<IAppHeader> = () => {
             <img src={CereLogo} alt="Cere Logo" />
           </NavLink>
         </div>
-        <NavLink style={{ textDecoration: "none" }} to="/">
+        <NavLink
+          style={{ textDecoration: "none" }}
+          className={classes.title}
+          to="/"
+        >
           <Typography variant="h4">Bridge</Typography>
           <br />
           <Typography variant="body1">
