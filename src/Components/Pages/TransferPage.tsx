@@ -6,7 +6,7 @@ import PreflightModalTransfer from "../../Modules/PreflightModalTransfer";
 import {
   Button,
   Typography,
-  // QuestionCircleSvg,
+  ExclamationCircleIcon,
   SelectInput,
 } from "@chainsafe/common-components";
 import { Form, Formik } from "formik";
@@ -197,6 +197,18 @@ const useStyles = makeStyles(({ constants, palette }: ITheme) =>
     accountSelector: {
       marginBottom: 24,
     },
+    noticeArea: {
+      flexGrow: 1,
+    },
+    noticeMessage: {
+      flexGrow: 1,
+      align: "center",
+    },
+    noticeIcon: {
+      height: 12,
+      width: 12,
+      marginRight: constants.generalUnit,
+    },
   })
 );
 
@@ -334,6 +346,20 @@ const TransferPage = () => {
 
   return (
     <article className={classes.root}>
+      <div className={classes.noticeArea}>
+        <Typography variant="body1" className={classes.noticeMessage}>
+          <ExclamationCircleIcon className={classes.noticeIcon} />
+          The Cere Mainnet is in Alpha stage now, and can be already used to
+          stake CERE tokens. The bridge only works <b>one way for now</b>{" "}
+          (Ethereum/Polygon to Cere Mainnet)!
+          <br />
+          <br />
+          <ExclamationCircleIcon className={classes.noticeIcon} />
+          If you do want to stake your CERE tokens on the Cere Mainnet already,
+          please <a href="https://google.com">submit the following form</a>, and
+          we'll get back to you shortly!
+        </Typography>
+      </div>
       <div className={classes.walletArea}>
         {!isReady ? (
           <Button
