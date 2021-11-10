@@ -356,8 +356,9 @@ const TransferPage = () => {
           <br />
           <ExclamationCircleIcon className={classes.noticeIcon} />
           If you do want to stake your CERE tokens on the Cere Mainnet already,
-          please <a href="https://google.com">submit the following form</a>, and
-          we'll get back to you shortly!
+          please{" "}
+          <a href="https://bit.ly/staking-cere">submit the following form</a>,
+          and we'll get back to you shortly!
         </Typography>
       </div>
       <div className={classes.walletArea}>
