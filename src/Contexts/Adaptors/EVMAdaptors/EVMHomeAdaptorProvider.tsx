@@ -42,6 +42,8 @@ export const EVMHomeAdaptorProvider = ({
       //   return "Localhost";
       case 1:
         return "Mainnet";
+      case 2:
+        return "Cere Blockchain";
       case 3:
         return "Ropsten";
       case 4:
