@@ -5,6 +5,7 @@ const cereTokenDecimals = 10;
 window.__RUNTIME_CONFIG__ = {
   CHAINBRIDGE: {
     chains: [
+      // ToDo: Uncomment when Polygon will be added
       // {
       //   chainId: 81,
       //   networkId: 80001,
