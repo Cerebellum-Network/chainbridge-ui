@@ -2,7 +2,7 @@
 
 ## vNext
 
-- ...
+- Added option to disable Polygon network from env
 
 ## v0.7.0
 
