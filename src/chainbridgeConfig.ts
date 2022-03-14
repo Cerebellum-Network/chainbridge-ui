@@ -24,6 +24,7 @@ export type BridgeConfig = {
   tokens: TokenConfig[];
   nativeTokenSymbol: string;
   decimals: number;
+  disableHomeNetwork?: boolean;
 };
 
 export type EvmBridgeConfig = BridgeConfig & {
