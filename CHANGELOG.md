@@ -2,7 +2,7 @@
 
 ## vNext
 
-- Added option to disable Polygon network from env
+- Added option to disable "Connect with Substrate Wallet" from env
 
 ## v0.7.0
 

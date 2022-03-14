@@ -130,18 +130,7 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
         setHomeChainConfig(undefined);
         return;
       }
-
-      // Disable polygon network if it sets true in environment file
-      let chain;
-      if (process.env.REACT_APP_DISABLE_POLYGON === "false") {
-        chain = homeChains.find((c) => c.chainId === chainId);
-      } else {
-        chain = homeChains.find(
-          (c) =>
-            c.chainId === chainId && c.chainId != blockchainChainIds.POLYGON
-        );
-      }
-
+      const chain = homeChains.find((c) => c.chainId === chainId);
       const fetchDestinationChainIds = (homeChainId: number) => {
         switch (homeChainId) {
           case blockchainChainIds.POLYGON:
