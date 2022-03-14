@@ -539,7 +539,7 @@ const TransferPage = () => {
                 >
                   Connect with ERC20 Wallet
                 </Button>
-                {process.env.REACT_APP_DISABLE_CONNECT_WITH_SUBSTRATE_BUTTON ===
+                {process.env.REACT_APP_CONNECT_WITH_SUBSTRATE_WALLET_ENABLED ===
                   "false" && (
                   <>
                     <Button
