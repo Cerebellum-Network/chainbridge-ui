@@ -16,7 +16,7 @@ window.__RUNTIME_CONFIG__ = {
           "https://polygon-mumbai.infura.io/v3/178b87e860404572bc217ca53fe594bd",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
-        disableHomeNetwork: true,
+        disableHomeNetwork: false,
         tokens: [
           {
             address: "0xcD54b7066839B25A0E5fDf76866D338cc7257179",
