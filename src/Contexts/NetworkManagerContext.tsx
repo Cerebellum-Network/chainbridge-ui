@@ -131,7 +131,7 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
         return;
       }
       const chain = homeChains.find(
-        (c) => c.chainId === chainId && !c.disableHomeNetwork
+        (c) => c.chainId === chainId && c.availableAsHomeNetwork
       );
 
       const fetchDestinationChainIds = (homeChainId: number) => {
