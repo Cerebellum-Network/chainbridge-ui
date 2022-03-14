@@ -130,8 +130,8 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
         setHomeChainConfig(undefined);
         return;
       }
-
       const chain = homeChains.find((c) => c.chainId === chainId);
+
       const fetchDestinationChainIds = (homeChainId: number) => {
         switch (homeChainId) {
           case blockchainChainIds.POLYGON:
