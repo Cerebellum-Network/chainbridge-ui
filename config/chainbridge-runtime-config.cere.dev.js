@@ -38,7 +38,7 @@ window.__RUNTIME_CONFIG__ = {
         networkId: 2,
         name: "Cere Devnet",
         decimals: cereTokenDecimals,
-        rpcUrl: "wss://rpc.v2.qanet.cere.network/ws",
+        rpcUrl: "wss://archive.v2.qanet.cere.network/ws",
         type: "Substrate",
         nativeTokenSymbol: "CERE",
         availableAsHomeNetwork: true,
