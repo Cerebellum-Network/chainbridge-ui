@@ -2,7 +2,9 @@
 
 ## vNext
 
-- ...
+## v0.12.0
+
+- Updated Testnet/Mainnet urls
 
 ## v0.11.2
 
