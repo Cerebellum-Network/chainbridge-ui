@@ -16,7 +16,6 @@ import { IHomeBridgeProviderProps } from "../interfaces";
 import { HomeBridgeContext } from "../../HomeBridgeContext";
 import { parseUnits } from "ethers/lib/utils";
 import { decodeAddress } from "@polkadot/util-crypto";
-
 import { hasTokenSupplies, getPriceCompatibility } from "./helpers";
 
 export const EVMHomeAdaptorProvider = ({
@@ -79,6 +78,12 @@ export const EVMHomeAdaptorProvider = ({
     homeChains,
     setNetworkId,
     setWalletType,
+    depositAmount,
+    setDepositAmount,
+    setDepositRecipient,
+    fallback,
+    analytics,
+    setAddress,
   } = useNetworkManager();
 
   const [homeBridge, setHomeBridge] = useState<Bridge | undefined>(undefined);
@@ -87,7 +92,6 @@ export const EVMHomeAdaptorProvider = ({
   );
   const [bridgeFee, setBridgeFee] = useState<number | undefined>();
 
-  const [depositAmount, setDepositAmount] = useState<number | undefined>();
   const [selectedToken, setSelectedToken] = useState<string>("");
 
   // Contracts
@@ -322,7 +326,9 @@ export const EVMHomeAdaptorProvider = ({
         console.log("Invalid token selected");
         return;
       }
+      setAddress(address);
       setTransactionStatus("Initializing Transfer");
+      setDepositRecipient(recipient);
       setDepositAmount(amount);
       setSelectedToken(tokenAddress);
       const erc20 = Erc20DetailedFactory.connect(tokenAddress, signer);
@@ -399,6 +405,12 @@ export const EVMHomeAdaptorProvider = ({
           (destChainId, resourceId, depositNonce) => {
             setDepositNonce(`${depositNonce.toString()}`);
             setTransactionStatus("In Transit");
+            analytics.trackTransferInTransitEvent({
+              address,
+              recipient,
+              nonce: parseInt(depositNonce),
+              amount: depositAmount as number,
+            });
           }
         );
 
@@ -414,6 +426,12 @@ export const EVMHomeAdaptorProvider = ({
         console.error(error);
         setTransactionStatus("Transfer Aborted");
         setSelectedToken(tokenAddress);
+        fallback?.stop();
+        analytics.trackTransferAbortedEvent({
+          address,
+          recipient,
+          amount: depositAmount as number,
+        });
       }
     },
     [
@@ -484,7 +502,6 @@ export const EVMHomeAdaptorProvider = ({
       return "";
     }
   };
-
   return (
     <HomeBridgeContext.Provider
       value={{

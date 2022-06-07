@@ -16,10 +16,8 @@ import {
   EVMHomeAdaptorProvider,
 } from "./Adaptors/EVMAdaptors";
 import { IDestinationBridgeProviderProps } from "./Adaptors/interfaces";
-import {
-  SubstrateDestinationAdaptorProvider,
-  SubstrateHomeAdaptorProvider,
-} from "./Adaptors/SubstrateAdaptors";
+import { SubstrateHomeAdaptorProvider } from "./Adaptors/SubstrateHomeAdaptor";
+import { SubstrateDestinationAdaptorProvider } from "./Adaptors/SubstrateDestinationAdaptor";
 import { DestinationBridgeContext } from "./DestinationBridgeContext";
 import { HomeBridgeContext } from "./HomeBridgeContext";
 import {
@@ -28,6 +26,8 @@ import {
   transitMessageReducer,
 } from "./Reducers/TransitMessageReducer";
 import { blockchainChainIds } from "../Constants/constants";
+import { Fallback } from "../Utils/Fallback";
+import AnalyticsService from "../Services/Analytics";
 
 interface INetworkManagerProviderProps {
   children: React.ReactNode | React.ReactNode[];
@@ -89,6 +89,20 @@ interface NetworkManagerContext {
 
   setTransferTxHash: (input: string) => void;
   transferTxHash: string;
+
+  setDepositRecipient: (input: string | undefined) => void;
+  depositRecipient: string | undefined;
+
+  setDepositAmount: (input: number | undefined) => void;
+  depositAmount: number | undefined;
+
+  setFallback: (input: Fallback | undefined) => void;
+  fallback: Fallback | undefined;
+
+  setAddress: (input: string | undefined) => void;
+  address: string | undefined;
+
+  analytics: AnalyticsService;
 }
 
 const NetworkManagerContext = React.createContext<
@@ -122,6 +136,26 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
   const [inTransitMessages, tokensDispatch] = useReducer(
     transitMessageReducer,
     []
+  );
+  const [depositRecipient, setDepositRecipient] = useState<string | undefined>(
+    undefined
+  );
+  const [depositAmount, setDepositAmount] = useState<number | undefined>(
+    undefined
+  );
+
+  const [fallback, setFallback] = useState<Fallback | undefined>(undefined);
+
+  const [address, setAddress] = useState<string | undefined>(undefined);
+
+  const [analytics] = useState(
+    new AnalyticsService({
+      ga: {
+        trackingId: chainbridgeConfig.ga.trackingId,
+        appName: chainbridgeConfig.ga.appName,
+        env: process.env.REACT_APP_ENV as string,
+      },
+    })
   );
 
   const handleSetHomeChain = useCallback(
@@ -214,6 +248,7 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
         </SubstrateDestinationAdaptorProvider>
       );
     } else {
+      // todo: understand why we need this part
       return (
         <DestinationBridgeContext.Provider
           value={{
@@ -250,6 +285,15 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
         tokensDispatch,
         setTransferTxHash,
         transferTxHash,
+        depositRecipient,
+        setDepositRecipient,
+        depositAmount,
+        setDepositAmount,
+        fallback,
+        setFallback,
+        address,
+        setAddress,
+        analytics,
       }}
     >
       {walletType === "Ethereum" ? (
