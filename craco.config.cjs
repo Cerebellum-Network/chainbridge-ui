@@ -1,6 +1,7 @@
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
-const InterpolateHtmlPlugin = require("interpolate-html-plugin");
+// const InterpolateHtmlPlugin = require("interpolate-html-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   babel: {
@@ -15,30 +16,28 @@ module.exports = {
           (compiler) => {
             new TerserPlugin({
               terserOptions: {
-                terserOptions: {
-                  parse: {
-                    ecma: 8,
-                  },
-                  compress: {
-                    ecma: 5,
-                    warnings: false,
-                    comparisons: false,
-                    inline: 2,
-                    drop_console: false,
-                  },
-                  mangle: {
-                    safari10: true,
-                  },
-                  output: {
-                    ecma: 5,
-                    comments: false,
-                    ascii_only: true,
-                  },
+                parse: {
+                  ecma: 8,
                 },
-                parallel: 2,
-                cache: true,
+                compress: {
+                  ecma: 5,
+                  warnings: false,
+                  comparisons: false,
+                  inline: 2,
+                  drop_console: false,
+                },
+                mangle: {
+                  safari10: true,
+                },
+                output: {
+                  ecma: 5,
+                  comments: false,
+                  ascii_only: true,
+                },
+                // parallel: 2,
+                // cache: true,
                 sourceMap: true,
-                extractComments: false,
+                // extractComments: false,
               },
             }).apply(compiler);
           },
@@ -63,7 +62,6 @@ module.exports = {
       resolve: {
         extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
         fallback: {
-          // "os-browserify": false,
           crypto: require.resolve("crypto-browserify"),
           stream: require.resolve("stream-browserify"),
           assert: require.resolve("assert"),
@@ -71,7 +69,6 @@ module.exports = {
           https: require.resolve("https-browserify"),
           os: require.resolve("os-browserify"),
           url: require.resolve("url"),
-
           path: require.resolve("path-browserify"),
           buffer: require.resolve("buffer"),
         },
@@ -81,11 +78,22 @@ module.exports = {
           process: "process/browser",
           Buffer: ["buffer", "Buffer"],
         }),
-        new InterpolateHtmlPlugin({ PUBLIC_URL: "static" }),
+        new MiniCssExtractPlugin(),
+        // new InterpolateHtmlPlugin({ PUBLIC_URL: "static" }),
       ],
       // target: "node",
       devtool: "source-map",
-      ignoreWarnings: [/Failed to parse source map/],
+      // ignoreWarnings: [/Failed to parse source map/],
+      ignoreWarnings: [
+        function ignoreSourcemapsloaderWarnings(warning) {
+          return (
+            warning.module &&
+            warning.module.resource.includes("node_modules") &&
+            warning.details &&
+            warning.details.includes("source-map-loader")
+          );
+        },
+      ],
     }),
   },
 };
