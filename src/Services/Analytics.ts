@@ -15,6 +15,10 @@ type TransferEventData = {
   nonce?: number;
 };
 
+type EventTime = {
+  timeMs: number;
+};
+
 class AnalyticsService {
   ga: GA;
 
@@ -22,13 +26,37 @@ class AnalyticsService {
     this.ga = new GA(options.ga);
   }
 
-  trackTransferInTransitEvent({
+  trackTransferInitializingEvent({
+    address,
+    recipient,
+    amount,
+  }: TransferEventData) {
+    this.ga.trackEvent("transfer_initializing", {
+      address: `"${address}"`,
+      recipient: `"${recipient}"`,
+      amount,
+    });
+  }
+
+  trackTransferFromSourceEvent({
+    address,
+    recipient,
+    amount,
+  }: TransferEventData) {
+    this.ga.trackEvent("transfer_from_source", {
+      address: `"${address}"`,
+      recipient: `"${recipient}"`,
+      amount,
+    });
+  }
+
+  trackTransferToDestinationEvent({
     address,
     recipient,
     nonce,
     amount,
   }: TransferEventData) {
-    this.ga.trackEvent("transfer_in_transit", {
+    this.ga.trackEvent("transfer_to_destination", {
       address: `"${address}"`,
       recipient: `"${recipient}"`,
       nonce,
@@ -89,6 +117,36 @@ class AnalyticsService {
       recipient: `"${recipient}"`,
       nonce,
       amount,
+    });
+  }
+
+  trackTransferUndefinedTxHash({
+    address,
+    recipient,
+    nonce,
+    amount,
+  }: TransferEventData) {
+    this.ga.trackEvent("transfer_undefined_tx_hash", {
+      address: `"${address}"`,
+      recipient: `"${recipient}"`,
+      nonce,
+      amount,
+    });
+  }
+
+  trackGotTransferTxHash({
+    address,
+    recipient,
+    nonce,
+    amount,
+    timeMs,
+  }: TransferEventData & EventTime) {
+    this.ga.trackEvent("transfer_got_tx_hash", {
+      address: `"${address}"`,
+      recipient: `"${recipient}"`,
+      nonce,
+      amount,
+      timeMs,
     });
   }
 }

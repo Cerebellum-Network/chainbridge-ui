@@ -4,13 +4,11 @@ import { useNetworkManager } from "../NetworkManagerContext";
 import { createApi, submitDeposit } from "./SubstrateApis/ChainBridgeAPI";
 import { IHomeBridgeProviderProps, InjectedAccountType } from "./interfaces";
 
-import { ApiPromise } from "@polkadot/api";
 import {
   web3Accounts,
   web3Enable,
   web3FromSource,
 } from "@polkadot/extension-dapp";
-import { TypeRegistry } from "@polkadot/types";
 import { Tokens } from "@chainsafe/web3-context/dist/context/tokensReducer";
 import { BigNumber as BN } from "bignumber.js";
 import { VoidFn } from "@polkadot/api/types";
@@ -33,12 +31,12 @@ export const SubstrateHomeAdaptorProvider = ({
     homeChains,
     depositAmount,
     setDepositAmount,
-    depositRecipient,
     setDepositRecipient,
     fallback,
     address,
     setAddress,
     analytics,
+    setHomeTransferTxHash,
     api,
     setApi,
   } = useNetworkManager();
@@ -188,7 +186,7 @@ export const SubstrateHomeAdaptorProvider = ({
                 address,
                 meta: {
                   ...meta,
-                  name: `${meta.name} (${meta.source})`,
+                  name: meta.name || address,
                 },
               }));
             })
@@ -241,16 +239,33 @@ export const SubstrateHomeAdaptorProvider = ({
           const injector = await web3FromSource(targetAccount.meta.source);
           setDepositAmount(amount);
           setDepositRecipient(recipient);
+          setSelectedToken(tokenAddress);
           setTransactionStatus("Initializing Transfer");
+          analytics.trackTransferInitializingEvent({
+            address,
+            recipient,
+            amount: depositAmount as number,
+          });
+
           transferExtrinsic
             .signAndSend(
               address,
               { signer: injector.signer },
               ({ status, events }) => {
-                status.isInBlock &&
+                if (status.isReady) {
+                  setTransactionStatus("Transfer from Source");
+                  analytics.trackTransferFromSourceEvent({
+                    address,
+                    recipient,
+                    amount: depositAmount as number,
+                  });
+                }
+
+                if (status.isInBlock) {
                   console.log(
                     `Completed at block hash #${status.isInBlock.toString()}`
                   );
+                }
 
                 if (status.isFinalized) {
                   events.filter(({ event }) => {
@@ -267,8 +282,9 @@ export const SubstrateHomeAdaptorProvider = ({
                     .then((response) => {
                       const depositNonce = `${response.toJSON()}`;
                       setDepositNonce(depositNonce);
-                      setTransactionStatus("In Transit");
-                      analytics.trackTransferInTransitEvent({
+                      setHomeTransferTxHash(status.asFinalized.toHex());
+                      setTransactionStatus("Transfer to Destination");
+                      analytics.trackTransferToDestinationEvent({
                         address,
                         recipient,
                         nonce: parseInt(depositNonce),

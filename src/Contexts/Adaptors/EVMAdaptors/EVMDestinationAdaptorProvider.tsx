@@ -9,7 +9,12 @@ import {
 import { useNetworkManager } from "../../NetworkManagerContext";
 import { IDestinationBridgeProviderProps } from "../interfaces";
 import { DestinationBridgeContext } from "../../DestinationBridgeContext";
-import { getProvider, getErc20ProposalHash, VoteStatus } from "./helpers";
+import {
+  getProvider,
+  getErc20ProposalHash,
+  VoteStatus,
+  getTransferTxHashByNonce,
+} from "./helpers";
 import { Fallback } from "../../../Utils/Fallback";
 
 export const EVMDestinationAdaptorProvider = ({
@@ -31,6 +36,7 @@ export const EVMDestinationAdaptorProvider = ({
     setFallback,
     address,
     analytics,
+    transferTxHash,
     destinationBridge,
     setDestinationBridge,
   } = useNetworkManager();
@@ -71,7 +77,14 @@ export const EVMDestinationAdaptorProvider = ({
           dataHash,
           tx
         ) => {
-          const txReceipt = await tx.getTransactionReceipt();
+          // Catch an error here because on disconnect it breaks the application
+          let txReceipt;
+          try {
+            txReceipt = await tx.getTransactionReceipt();
+          } catch (err) {
+            console.error(err);
+          }
+          if (!txReceipt) return;
           const proposalStatus = BigNumber.from(status).toNumber();
           switch (proposalStatus) {
             case 1:
@@ -100,8 +113,8 @@ export const EVMDestinationAdaptorProvider = ({
               break;
             case 3:
               if (transactionStatus === "Transfer Completed") return;
-              setTransactionStatus("Transfer Completed");
               setTransferTxHash(tx.transactionHash);
+              setTransactionStatus("Transfer Completed");
               fallback?.stop();
               analytics.trackTransferCompletedEvent({
                 address: address as string,
@@ -133,7 +146,14 @@ export const EVMDestinationAdaptorProvider = ({
           null
         ),
         async (originChainId, depositNonce, status, resourceId, tx) => {
-          const txReceipt = await tx.getTransactionReceipt();
+          // Catch an error here because on disconnect it breaks the application
+          let txReceipt;
+          try {
+            txReceipt = await tx.getTransactionReceipt();
+          } catch (err) {
+            console.error(err);
+          }
+          if (!txReceipt) return;
           if (txReceipt.status === 1) {
             setDepositVotes(depositVotes + 1);
           }
@@ -241,9 +261,40 @@ export const EVMDestinationAdaptorProvider = ({
   ]);
 
   useEffect(() => {
+    if (transactionStatus === "Transfer Completed") {
+      if (!destinationBridge || transferTxHash) return;
+      const startTime = performance.now();
+      getTransferTxHashByNonce(
+        destinationChainConfig as EvmBridgeConfig,
+        parseInt(depositNonce as string)
+      ).then((txHash: string) => {
+        if (txHash) {
+          setTransferTxHash(txHash);
+          const timeMs = performance.now() - startTime;
+          analytics.trackGotTransferTxHash({
+            address: address as string,
+            recipient: depositRecipient as string,
+            nonce: parseInt(depositNonce as string),
+            amount: depositAmount as number,
+            timeMs,
+          });
+          console.log(`Get transfer tx hash time: ${timeMs} ms`);
+        } else {
+          analytics.trackTransferUndefinedTxHash({
+            address: address as string,
+            recipient: depositRecipient as string,
+            nonce: parseInt(depositNonce as string),
+            amount: depositAmount as number,
+          });
+        }
+      });
+    }
+  }, [destinationBridge, transactionStatus, depositRecipient, transferTxHash]);
+
+  useEffect(() => {
     const canInitFallback =
       process.env.REACT_APP_TRANSFER_FALLBACK_ENABLED === "true" &&
-      transactionStatus === "In Transit" &&
+      transactionStatus === "Transfer to Destination" &&
       destinationBridge &&
       !fallback?.started();
     if (canInitFallback) initFallbackMechanism();

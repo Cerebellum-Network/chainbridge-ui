@@ -387,6 +387,8 @@ const TransferPage = () => {
     setWalletType,
     handleSetHomeChain,
     setAddress,
+    setTransferTxHash,
+    setHomeTransferTxHash,
   } = useNetworkManager();
   const destinationBridge = useDestinationBridge();
 
@@ -601,6 +603,8 @@ const TransferPage = () => {
                     ]);
                     setWalletType("unset");
                     setAddress(undefined);
+                    setTransferTxHash(undefined);
+                    setHomeTransferTxHash(undefined);
                   }}
                 >
                   Change
@@ -626,7 +630,7 @@ const TransferPage = () => {
                         label="Select account"
                         className={classes.generalInput}
                         options={accounts.map((acc, i) => ({
-                          label: acc.address,
+                          label: acc.meta.name,
                           value: i,
                         }))}
                         onChange={(value) =>

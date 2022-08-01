@@ -88,6 +88,7 @@ export const EVMHomeAdaptorProvider = ({
     fallback,
     analytics,
     setAddress,
+    setHomeTransferTxHash,
     api,
   } = useNetworkManager();
 
@@ -323,6 +324,12 @@ export const EVMHomeAdaptorProvider = ({
       setDepositRecipient(recipient);
       setDepositAmount(amount);
       setSelectedToken(tokenAddress);
+      analytics.trackTransferInitializingEvent({
+        address,
+        recipient,
+        amount: depositAmount as number,
+      });
+
       const erc20 = Erc20DetailedFactory.connect(tokenAddress, signer);
       const erc20Decimals = tokens[tokenAddress].decimals;
 
@@ -394,10 +401,11 @@ export const EVMHomeAdaptorProvider = ({
             token.resourceId,
             null
           ),
-          (destChainId, resourceId, depositNonce) => {
+          (destChainId, resourceId, depositNonce, tx) => {
+            setHomeTransferTxHash(tx.transactionHash);
             setDepositNonce(`${depositNonce.toString()}`);
-            setTransactionStatus("In Transit");
-            analytics.trackTransferInTransitEvent({
+            setTransactionStatus("Transfer to Destination");
+            analytics.trackTransferToDestinationEvent({
               address,
               recipient,
               nonce: parseInt(depositNonce),
@@ -406,12 +414,23 @@ export const EVMHomeAdaptorProvider = ({
           }
         );
 
-        await (
-          await homeBridge.deposit(destinationChainId, token.resourceId, data, {
+        const res = await homeBridge.deposit(
+          destinationChainId,
+          token.resourceId,
+          data,
+          {
             gasPrice: gasPriceCompatibility,
             value: utils.parseUnits((bridgeFee || 0).toString(), 18),
-          })
-        ).wait();
+          }
+        );
+        setTransactionStatus("Transfer from Source");
+        await res.wait();
+
+        analytics.trackTransferFromSourceEvent({
+          address,
+          recipient,
+          amount: depositAmount as number,
+        });
 
         return Promise.resolve();
       } catch (error) {
