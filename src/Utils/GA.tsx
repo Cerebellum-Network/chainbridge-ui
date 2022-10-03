@@ -22,6 +22,7 @@ export class GA {
     this.env = options.env;
   }
 
+
   trackEvent(name: string, data: EventData) {
     data.appName = this.appName;
     data.env = this.env;
