@@ -12,7 +12,8 @@
     "@material-ui/icons": "4.11.3",
     "@material-ui/styles": "4.10.0",
     "@polkadot/api": "8.2.1",
-    "@polkadot/extension-dapp": "0.40.1",
+    "@polkadot/extension-dapp": "0.44.6",
+    "@polkadot/util-crypto": "8.2.2",
     "@sentry/react": "7.7.0",
     "bnc-onboard": "1.39.1",
     "clsx": "1.1.1",
@@ -26,6 +27,7 @@
     "react-dom": "16.13.1",
     "react-ga4": "1.4.1",
     "react-toast-notifications": "2.4.0",
+    "scryptsy": "^2.1.0",
     "semver": "6.3.0",
     "yup": "0.29.3"
   },
