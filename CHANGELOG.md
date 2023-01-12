@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ## vNext
-...
+- Fixed preflight check misaligned issue
 
 ## v0.20.0
 
