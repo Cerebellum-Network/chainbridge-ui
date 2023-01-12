@@ -2,6 +2,7 @@
 
 ## vNext
 - Fixed preflight check misaligned issue
+- Fix WalletConnect login issue after auth popup was closed
 
 ## v0.20.0
 
