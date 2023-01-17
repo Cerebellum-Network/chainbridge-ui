@@ -1,7 +1,8 @@
 # CHANGELOG
 
 ## vNext
-- Fix WalletConnect login issue after auth popup was closed
+- Fixed preflight check misaligned issue
+- Fixed WalletConnect login issue after auth popup was closed
 
 ## v0.20.0
 
@@ -10,7 +11,7 @@
 ## v0.19.0
 
 - WalletConnect integration
-- Fix fallback mechanism launch after transaction was finished
+- Fixed fallback mechanism launch after transaction was finished
 
 ## v0.18.0
 
@@ -27,7 +28,7 @@
 
 ## v0.16.0
 
-- Rename ERC20 to ERC-20
+- Renamed ERC20 to ERC-20
 - Migrated to GitHub actions
 
 ## v0.15.0

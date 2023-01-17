@@ -58,6 +58,7 @@ const useStyles = makeStyles(({ constants, palette }: ITheme) =>
       position: "relative",
       backgroundColor: "white",
       minWidth: 400,
+      maxWidth: 430,
       "@media only screen and (max-width: 360px)": {
         minWidth: 320,
       },
@@ -114,7 +115,7 @@ const useStyles = makeStyles(({ constants, palette }: ITheme) =>
       marginTop: constants.generalUnit * 3,
     },
     title: {
-      fontSize: 24,
+      fontSize: 23,
       fontWeight: "bold",
       color: "black",
       textAlign: "center",
