@@ -529,12 +529,14 @@ const TransferPage = () => {
       .required("Please add a receiving address"),
   });
 
+  const initialising = !isReady && !transactionStatus;
+
   return (
     <article className={classes.root}>
       <div className={classes.wrapper}>
         <div className={classes.header}>
           {process.env.REACT_APP_MAINTENANCE === "false" &&
-            (!isReady ? (
+            (initialising ? (
               <>
                 <ArrowIcon className={classes.logo} />
                 <div className={classes.headerText}>
@@ -551,12 +553,12 @@ const TransferPage = () => {
               </span>
             ))}
         </div>
-        {!isReady && process.env.REACT_APP_MAINTENANCE === "false" ? (
+        {initialising && process.env.REACT_APP_MAINTENANCE === "false" ? (
           <hr className={classes.horizontalLine} />
         ) : (
           <></>
         )}
-        {!isReady ? (
+        {initialising ? (
           <div className={classes.selectArea}>
             <HomeIcon className={classes.walletLogo} />
 

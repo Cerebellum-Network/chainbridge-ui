@@ -3,6 +3,7 @@
 ## vNext
 - Fixed preflight check misaligned issue
 - Fixed WalletConnect login issue after auth popup was closed
+- Fixed app transfer page reset after mobile restart
 
 ## v0.20.0
 
