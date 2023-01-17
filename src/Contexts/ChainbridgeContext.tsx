@@ -87,6 +87,7 @@ const ChainbridgeProvider = ({
     setTransferTxHash,
     setHomeTransferTxHash,
     setAddress,
+    setWalletType
   } = useNetworkManager();
 
   const {
@@ -122,6 +123,8 @@ const ChainbridgeProvider = ({
     setAddress(undefined);
     setTransferTxHash(undefined);
     setHomeTransferTxHash(undefined);
+    const disconnected = !isReady && transactionStatus === "Transfer Completed";
+    if (disconnected) setWalletType('unset');
   };
 
   const handleDeposit = useCallback(
