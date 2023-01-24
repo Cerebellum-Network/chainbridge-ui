@@ -201,7 +201,6 @@ export const SubstrateHomeAdaptorProvider = ({
               handleSetHomeChain(
                 homeChains.find((item) => item.type === "Substrate")?.chainId
               );
-              setIsReady(true);
             })
             .catch(console.error);
         })
