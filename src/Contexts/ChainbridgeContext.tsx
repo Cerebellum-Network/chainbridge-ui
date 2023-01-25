@@ -111,7 +111,6 @@ const ChainbridgeProvider = ({
   } = useHomeBridge();
 
   const resetDeposit = () => {
-    chainbridgeConfig.chains.length > 2 && setDestinationChain(undefined);
     setTransactionStatus(undefined);
     setDepositNonce(undefined);
     setDepositVotes(0);

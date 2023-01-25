@@ -5,6 +5,7 @@
 - Fixed WalletConnect login issue after auth popup was closed
 - Fixed app transfer page reset after mobile restart
 - Fixed transfer page reset after provider disconnection
+- Fixed Cere stuck connection after transfer from Polygon to Cere
 
 ## v0.20.0
 
