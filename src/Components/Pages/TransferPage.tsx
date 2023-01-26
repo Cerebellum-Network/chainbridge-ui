@@ -58,6 +58,7 @@ const useStyles = makeStyles(({ constants, palette }: ITheme) =>
       position: "relative",
       backgroundColor: "white",
       minWidth: 400,
+      maxWidth: 430,
       "@media only screen and (max-width: 360px)": {
         minWidth: 320,
       },
@@ -114,7 +115,7 @@ const useStyles = makeStyles(({ constants, palette }: ITheme) =>
       marginTop: constants.generalUnit * 3,
     },
     title: {
-      fontSize: 24,
+      fontSize: 23,
       fontWeight: "bold",
       color: "black",
       textAlign: "center",
@@ -528,12 +529,14 @@ const TransferPage = () => {
       .required("Please add a receiving address"),
   });
 
+  const initialising = !isReady && !transactionStatus;
+
   return (
     <article className={classes.root}>
       <div className={classes.wrapper}>
         <div className={classes.header}>
           {process.env.REACT_APP_MAINTENANCE === "false" &&
-            (!isReady ? (
+            (initialising ? (
               <>
                 <ArrowIcon className={classes.logo} />
                 <div className={classes.headerText}>
@@ -550,12 +553,12 @@ const TransferPage = () => {
               </span>
             ))}
         </div>
-        {!isReady && process.env.REACT_APP_MAINTENANCE === "false" ? (
+        {initialising && process.env.REACT_APP_MAINTENANCE === "false" ? (
           <hr className={classes.horizontalLine} />
         ) : (
           <></>
         )}
-        {!isReady ? (
+        {initialising ? (
           <div className={classes.selectArea}>
             <HomeIcon className={classes.walletLogo} />
 

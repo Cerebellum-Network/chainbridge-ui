@@ -3,6 +3,13 @@
 ## vNext
 ...
 
+## v0.21.0
+- Fixed preflight check misaligned issue
+- Fixed WalletConnect login issue after auth popup was closed
+- Fixed app transfer page reset after mobile restart
+- Fixed transfer page reset after provider disconnection
+- Fixed Cere stuck connection after transfer from Polygon to Cere
+
 ## v0.20.0
 
 - Added support of the Cere node v2.32.0
@@ -10,7 +17,7 @@
 ## v0.19.0
 
 - WalletConnect integration
-- Fix fallback mechanism launch after transaction was finished
+- Fixed fallback mechanism launch after transaction was finished
 
 ## v0.18.0
 
@@ -27,7 +34,7 @@
 
 ## v0.16.0
 
-- Rename ERC20 to ERC-20
+- Renamed ERC20 to ERC-20
 - Migrated to GitHub actions
 
 ## v0.15.0
