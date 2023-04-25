@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ## vNext
-...
+- Updated Community and Support links
 
 ## v0.20.0
 
