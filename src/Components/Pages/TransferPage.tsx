@@ -811,7 +811,7 @@ const TransferPage = () => {
                 className={classes.footerText}
                 to={{
                   pathname:
-                    "https://cere-network.medium.com/how-to-bridge-to-cere-mainnet-and-stake-e3ad3fe1a594",
+                    "https://portal.cere.network/cere/How-to-Bridge-to-Cere-Mainnet-Stake-4e51b563a9804f0e88cad7ed0bee3228",
                 }}
                 target="_blank"
               >
