@@ -3,6 +3,9 @@
 ## vNext
 ...
 
+## v0.22.1 
+- Changed Support Service from Telegram to Discord
+
 ## v0.22.0
 - Updated Community and Support links
 
