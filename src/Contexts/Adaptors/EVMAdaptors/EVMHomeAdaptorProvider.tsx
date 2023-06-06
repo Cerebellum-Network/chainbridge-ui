@@ -27,7 +27,17 @@ const { ONBOARD_SELECTED_WALLET } = localStorageVars;
 export const EVMHomeAdaptorProvider = ({
   children,
 }: IHomeBridgeProviderProps) => {
-  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+  const [
+    {
+      wallet, // the wallet that has been connected or null if not yet connected
+      connecting // boolean indicating if connection is in progress
+    },
+    connect, // function to call to initiate user to connect wallet
+    disconnect, // function to call with wallet<DisconnectOptions> to disconnect wallet
+    updateBalances, // function to be called with an optional array of wallet addresses connected through Onboard to update balance or empty/no params to update all connected wallets
+    setWalletModules, // function to be called with an array of wallet modules to conditionally allow connection of wallet types i.e. setWalletModules([ledger, trezor, injected])
+    setPrimaryWallet // function that can set the primary wallet and/or primary account within that wallet. The wallet that is set needs to be passed in for the first parameter and if you would like to set the primary account, the address of that account also needs to be passed in
+  ] = useConnectWallet();
 
   const {
     isReady,
@@ -36,7 +46,6 @@ export const EVMHomeAdaptorProvider = ({
     gasPrice,
     address,
     tokens,
-    checkIsReady,
     ethBalance,
     onboard,
     resetOnboard,
@@ -83,10 +92,8 @@ export const EVMHomeAdaptorProvider = ({
   const [account, setAccount] = useState<string | undefined>();
 
   const checkWallet = useCallback(async () => {
-    let success = false;
     try {
-     success = await checkIsReady();
-      if (success) {
+      if (wallet) {
         if (homeChainConfig && network && isReady && provider) {
           const signer = provider.getSigner();
           if (!signer) {
@@ -122,9 +129,9 @@ export const EVMHomeAdaptorProvider = ({
       console.error(err);
     } finally {
       setInitialising(false);
-      return success;
-    }             
-  }, [checkIsReady, homeChainConfig, isReady, network, provider]);
+      return Boolean(wallet);
+    }
+  }, [wallet, homeChainConfig, isReady, network, provider]);
 
   useEffect(() => {
     if (network) {
@@ -203,7 +210,6 @@ export const EVMHomeAdaptorProvider = ({
     homeChainConfig,
     isReady,
     provider,
-    checkIsReady,
     network,
     networkId,
     setNetworkId,
