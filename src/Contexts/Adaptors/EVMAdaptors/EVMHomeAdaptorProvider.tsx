@@ -65,6 +65,11 @@ export const EVMHomeAdaptorProvider = ({
   // Network is an id of current chain.
   const network = Number(connectedChain?.id);
 
+  const disconnectWallet = () => {
+    if (wallet) {
+      disconnect(wallet);
+    }
+  };
   // const {
   //   gasPrice,
   //   tokens,
@@ -161,7 +166,7 @@ export const EVMHomeAdaptorProvider = ({
       const supported = !!chainbridgeConfig.chains.find(chain => chain.networkId === network);
       setNetworkSupported(supported);
       if (!!network && !supported) {
-        resetOnboard();
+        disconnectWallet();
         setWalletType("unset");
       }
       if (chain) {
@@ -219,7 +224,7 @@ export const EVMHomeAdaptorProvider = ({
           })
           .finally(() => {
             if (!connected) {
-              resetOnboard();
+              disconnectWallet();
               setWalletType("unset");
             }
             console.log("Wallet connection finished:", { connected });
@@ -525,7 +530,7 @@ export const EVMHomeAdaptorProvider = ({
       value={{
         connect: handleConnect,
         disconnect: async () => {
-          resetOnboard();
+          disconnectWallet()
           setWalletType("unset");
         },
         bridgeFee,
