@@ -1,6 +1,6 @@
 import React from "react";
 import { Bridge, BridgeFactory } from "@chainsafe/chainbridge-contracts";
-import { useConnectWallet } from "@web3-onboard/react";
+import { useConnectWallet, useSetChain } from "@web3-onboard/react";
 import { BigNumber, utils, ethers} from "ethers";
 import { useCallback, useEffect, useState } from "react";
 import { Web3Provider } from "@ethersproject/providers";
@@ -39,6 +39,15 @@ export const EVMHomeAdaptorProvider = ({
     setPrimaryWallet // function that can set the primary wallet and/or primary account within that wallet. The wallet that is set needs to be passed in for the first parameter and if you would like to set the primary account, the address of that account also needs to be passed in
   ] = useConnectWallet();
 
+  const [
+    {
+      chains, // the list of chains that web3-onboard was initialized with
+      connectedChain, // the current chain the user's wallet is connected to
+      settingChain // boolean indicating if the chain is in the process of being set
+    },
+    setChain // function to call to initiate user to switch chains in their wallet
+  ] = useSetChain();
+
   // create an ethers provider
   let provider: Web3Provider;
 
@@ -53,9 +62,10 @@ export const EVMHomeAdaptorProvider = ({
   // TODO: Basically it's balance and address but need to check.
   const ethBalance = wallet?.accounts[0].balance;
   const address = wallet?.accounts[0].address;
+  // Network is an id of current chain.
+  const network = Number(connectedChain?.id);
 
   // const {
-  //   network,
   //   gasPrice,
   //   tokens,
   //   onboard,
