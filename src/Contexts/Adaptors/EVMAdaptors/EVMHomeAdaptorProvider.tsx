@@ -1,6 +1,7 @@
 import React from "react";
 import { Bridge, BridgeFactory } from "@chainsafe/chainbridge-contracts";
 import { useWeb3 } from "@chainsafe/web3-context";
+import { useConnectWallet } from "@web3-onboard/react";
 import { BigNumber, utils } from "ethers";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -26,6 +27,8 @@ const { ONBOARD_SELECTED_WALLET } = localStorageVars;
 export const EVMHomeAdaptorProvider = ({
   children,
 }: IHomeBridgeProviderProps) => {
+  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+
   const {
     isReady,
     network,
@@ -33,7 +36,6 @@ export const EVMHomeAdaptorProvider = ({
     gasPrice,
     address,
     tokens,
-    wallet,
     checkIsReady,
     ethBalance,
     onboard,
