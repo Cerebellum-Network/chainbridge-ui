@@ -1,9 +1,9 @@
 import React from "react";
 import { Bridge, BridgeFactory } from "@chainsafe/chainbridge-contracts";
-import { useWeb3 } from "@chainsafe/web3-context";
 import { useConnectWallet } from "@web3-onboard/react";
-import { BigNumber, utils } from "ethers";
+import { BigNumber, utils, ethers} from "ethers";
 import { useCallback, useEffect, useState } from "react";
+import { Web3Provider } from "@ethersproject/providers";
 import {
   chainbridgeConfig,
   EvmBridgeConfig,
@@ -30,7 +30,7 @@ export const EVMHomeAdaptorProvider = ({
   const [
     {
       wallet, // the wallet that has been connected or null if not yet connected
-      connecting // boolean indicating if connection is in progress
+      connecting // boolean indicating if connection is in progress,
     },
     connect, // function to call to initiate user to connect wallet
     disconnect, // function to call with wallet<DisconnectOptions> to disconnect wallet
@@ -39,17 +39,28 @@ export const EVMHomeAdaptorProvider = ({
     setPrimaryWallet // function that can set the primary wallet and/or primary account within that wallet. The wallet that is set needs to be passed in for the first parameter and if you would like to set the primary account, the address of that account also needs to be passed in
   ] = useConnectWallet();
 
-  const {
-    isReady,
-    network,
-    provider,
-    gasPrice,
-    address,
-    tokens,
-    ethBalance,
-    onboard,
-    resetOnboard,
-  } = useWeb3();
+  // create an ethers provider
+  let provider: Web3Provider;
+
+  if (wallet) {
+    // if using ethers v6 this is:
+    // ethersProvider = new ethers.BrowserProvider(wallet.provider, 'any')
+    provider = new ethers.providers.Web3Provider(wallet.provider, 'any')
+  }
+
+  const isReady = Boolean(wallet) && !connecting;
+
+  // TODO: Basically it's balance and address but need to check.
+  const ethBalance = wallet?.accounts[0].balance;
+  const address = wallet?.accounts[0].address;
+
+  // const {
+  //   network,
+  //   gasPrice,
+  //   tokens,
+  //   onboard,
+  //   resetOnboard,
+  // } = useWeb3();
 
   const {
     homeChainConfig,
@@ -157,15 +168,15 @@ export const EVMHomeAdaptorProvider = ({
     wallet?.provider?.on("error", (err: any) => {
       console.error("Wallet provider error:", err);
     });
-    
+
     // On the first connect to a blockchain this event doesn't happen
     wallet?.provider?.on("chainChanged", (newNetworkId: number) => {
       console.log("Chain changed:", { networkId, newNetworkId });
       if (newNetworkId === networkId) return;
       setNetworkId(
-        newNetworkId.toString().substring(0, 2) === '0x' 
+        newNetworkId.toString().substring(0, 2) === '0x'
         ? parseInt(newNetworkId.toString(), 16)
-        : newNetworkId 
+        : newNetworkId
       );
       if (isReady && networkSupported) window.location.reload();
     });
