@@ -74,7 +74,6 @@ export const EVMHomeAdaptorProvider = ({
   //   gasPrice,
   //   tokens,
   //   onboard,
-  //   resetOnboard,
   // } = useWeb3();
 
   const {
