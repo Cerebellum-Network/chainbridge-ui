@@ -70,10 +70,6 @@ export const EVMHomeAdaptorProvider = ({
       disconnect(wallet);
     }
   };
-  // const {
-  //   tokens,
-  //   onboard,
-  // } = useWeb3();
 
   const {
     homeChainConfig,
@@ -174,7 +170,7 @@ export const EVMHomeAdaptorProvider = ({
   }, [handleSetHomeChain, homeChains, network, setNetworkId]);
 
   useEffect(() => {
-    if (initialising || homeBridge || !onboard) return;
+    if (initialising || homeBridge) return;
     console.log("Starting init");
     setInitialising(true);
 
@@ -205,29 +201,9 @@ export const EVMHomeAdaptorProvider = ({
     let connected = false;
 
     if (walletType === "Ethereum") {
-      onboard
-          .walletSelect(selectedWallet)
-          .then(async (success) => {
-            console.log("Wallet select:", { success });
-            setWalletSelected(success);
-            if (success) {
-              connected = await checkWallet() as boolean;
-              console.log("Wallet check:", { connected });
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            setInitialising(false);
-            connected = false;
-          })
-          .finally(() => {
-            if (!connected) {
-              disconnectWallet();
-              setWalletType("unset");
-            }
-            console.log("Wallet connection finished:", { connected });
-          })
-      }
+      // TODO: handle the case with selectedWallet, logging and setting values to hooks.
+      connect();
+    }
   }, [
     checkWallet,
     initialising,
@@ -238,8 +214,6 @@ export const EVMHomeAdaptorProvider = ({
     networkId,
     setNetworkId,
     homeBridge,
-    onboard,
-    resetOnboard,
     walletSelected,
     setWalletType,
     account,
@@ -270,11 +244,8 @@ export const EVMHomeAdaptorProvider = ({
   }, [homeBridge]);
 
   const handleConnect = useCallback(async () => {
-    if (wallet && wallet.connect && network) {
-      await onboard?.walletSelect();
-      await wallet.connect();
-    }
-  }, [wallet, network, onboard]);
+   await connect();
+  }, [connect]);
 
   const handleCheckSupplies = useCallback(
     async (amount: number) => {
