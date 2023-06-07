@@ -71,7 +71,6 @@ export const EVMHomeAdaptorProvider = ({
     }
   };
   // const {
-  //   gasPrice,
   //   tokens,
   //   onboard,
   // } = useWeb3();
@@ -360,6 +359,9 @@ export const EVMHomeAdaptorProvider = ({
         recipient.substr(2); // recipientAddress (?? bytes)
 
       try {
+        // TODO: Move to single hook to handle fail requests.
+        const gasPrice = Number(await provider.getGasPrice());
+
         const gasPriceCompatibility = await getPriceCompatibility(
           provider,
           homeChainConfig,
@@ -461,7 +463,6 @@ export const EVMHomeAdaptorProvider = ({
       address,
       bridgeFee,
       homeChainConfig,
-      gasPrice,
       provider,
       setDepositNonce,
       setTransactionStatus,
@@ -502,6 +503,9 @@ export const EVMHomeAdaptorProvider = ({
       return "not ready";
 
     try {
+      // TODO: Move to single hook to handle fail requests.
+      const gasPrice = Number(await provider.getGasPrice());
+
       const gasPriceCompatibility = await getPriceCompatibility(
         provider,
         homeChainConfig,
