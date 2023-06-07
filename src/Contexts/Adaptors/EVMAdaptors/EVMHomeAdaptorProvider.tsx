@@ -48,19 +48,22 @@ export const EVMHomeAdaptorProvider = ({
     setChain // function to call to initiate user to switch chains in their wallet
   ] = useSetChain();
 
-  // create an ethers provider
-  let provider: Web3Provider;
+  const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
 
-  if (wallet) {
-    // if using ethers v6 this is:
-    // ethersProvider = new ethers.BrowserProvider(wallet.provider, 'any')
-    provider = new ethers.providers.Web3Provider(wallet.provider, 'any')
-  }
+  useEffect(() => {
+    if (wallet?.provider) {
+      // if using ethers v6 this is:
+      // ethersProvider = new ethers.BrowserProvider(wallet.provider, 'any')
+      setProvider(new ethers.providers.Web3Provider(wallet.provider, 'any'))
+    } else {
+      setProvider(null)
+    }
+  }, [wallet]);
 
   const isReady = Boolean(wallet) && !connecting;
 
   // TODO: Basically it's balance and address but need to check.
-  const ethBalance = wallet?.accounts[0].balance;
+  const ethBalance = Number(wallet?.accounts[0].balance?.toString());
   const address = wallet?.accounts[0].address;
   // Network is an id of current chain.
   const network = Number(connectedChain?.id);
@@ -331,7 +334,7 @@ export const EVMHomeAdaptorProvider = ({
 
       try {
         // TODO: Move to single hook to handle fail requests.
-        const gasPrice = Number(await provider.getGasPrice());
+        const gasPrice = Number(await provider?.getGasPrice());
 
         const gasPriceCompatibility = await getPriceCompatibility(
           provider,
@@ -446,6 +449,9 @@ export const EVMHomeAdaptorProvider = ({
       return "not ready";
 
     try {
+      // TODO: Move to single hook to handle fail requests.
+      const gasPrice = Number(await provider?.getGasPrice());
+
       const gasPriceCompatibility = await getPriceCompatibility(
         provider,
         homeChainConfig,
@@ -475,7 +481,7 @@ export const EVMHomeAdaptorProvider = ({
 
     try {
       // TODO: Move to single hook to handle fail requests.
-      const gasPrice = Number(await provider.getGasPrice());
+      const gasPrice = Number(await provider?.getGasPrice());
 
       const gasPriceCompatibility = await getPriceCompatibility(
         provider,
