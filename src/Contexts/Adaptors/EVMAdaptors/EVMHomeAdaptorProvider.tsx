@@ -3,7 +3,6 @@ import { Bridge, BridgeFactory } from "@chainsafe/chainbridge-contracts";
 import { useConnectWallet, useSetChain } from "@web3-onboard/react";
 import { BigNumber, utils, ethers} from "ethers";
 import { useCallback, useEffect, useState } from "react";
-import { Web3Provider } from "@ethersproject/providers";
 import {
   chainbridgeConfig,
   EvmBridgeConfig,
@@ -38,6 +37,11 @@ export const EVMHomeAdaptorProvider = ({
     setWalletModules, // function to be called with an array of wallet modules to conditionally allow connection of wallet types i.e. setWalletModules([ledger, trezor, injected])
     setPrimaryWallet // function that can set the primary wallet and/or primary account within that wallet. The wallet that is set needs to be passed in for the first parameter and if you would like to set the primary account, the address of that account also needs to be passed in
   ] = useConnectWallet();
+
+  // TODO: Replace it in the future,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const tokens = [];
 
   const [
     {

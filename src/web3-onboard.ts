@@ -4,7 +4,8 @@ import walletConnectModule, {WalletConnectOptions} from '@web3-onboard/walletcon
 import { init } from '@web3-onboard/react'
 
 const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
-const NETWORK_ID = Number(process.env.REACT_APP_NETWORK_ID);
+// TODO: Resolve this issue with `NETWORK_ID` in the future.
+const NETWORK_ID = Number(process.env.REACT_APP_NETWORK_ID) || 1;
 
 const injected = injectedModule({
     custom: [],
