@@ -68,19 +68,6 @@ const App: React.FC<{}> = () => {
     }
   });
 
-  const tokens = chainbridgeConfig.chains
-    .filter((c) => c.type === "Ethereum")
-    .reduce((tca, bc: any) => {
-      if (bc.networkId) {
-        return {
-          ...tca,
-          [bc.networkId]: bc.tokens,
-        };
-      } else {
-        return tca;
-      }
-    }, {});
-
   return (
     <ErrorBoundary
       fallback={({ error, componentStack, eventId, resetError }) => (

@@ -38,10 +38,8 @@ export const EVMHomeAdaptorProvider = ({
     setPrimaryWallet // function that can set the primary wallet and/or primary account within that wallet. The wallet that is set needs to be passed in for the first parameter and if you would like to set the primary account, the address of that account also needs to be passed in
   ] = useConnectWallet();
 
-  // TODO: Replace it in the future,
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const tokens = [];
+  // TODO: Add mapping of all tokens from config.
+  const tokens = chainbridgeConfig.chains[1].tokens;
 
   const [
     {
