@@ -2,10 +2,7 @@
 import injectedModule from '@web3-onboard/injected-wallets'
 import walletConnectModule, {WalletConnectOptions} from '@web3-onboard/walletconnect'
 import { init } from '@web3-onboard/react'
-
-const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
-// TODO: Resolve this issue with `NETWORK_ID` in the future.
-const NETWORK_ID = Number(process.env.REACT_APP_NETWORK_ID) || 1;
+import { chainbridgeConfig } from './chainbridgeConfig';
 
 const injected = injectedModule({
     custom: [],
@@ -28,14 +25,16 @@ const wcV2InitOptions: WalletConnectOptions = {
 // if WalletConnect version isn't set, it will default to V1 until V1 sunset
 const walletConnect = walletConnectModule(wcV2InitOptions || wcV1InitOptions);
 
+const ethChains = chainbridgeConfig.chains
+    .filter(chain => chain.type === "Ethereum")
+    .map(({ networkId, rpcUrl, nativeTokenSymbol, name}) => ({
+        id: Number(networkId),
+        token: nativeTokenSymbol,
+        label: name,
+        rpcUrl,
+    }));
+
 export const web3Onboard = init({
     wallets: [injected, walletConnect],
-    chains: [
-        {
-            id: NETWORK_ID.toString(16),
-            token: 'ETH',
-            label: 'Ethereum Mainnet',
-            rpcUrl: `https://mainnet.infura.io/v3/${INFURA_KEY}`
-        }
-    ]
+    chains: ethChains,
 });
