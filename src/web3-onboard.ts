@@ -10,7 +10,7 @@ const injected = injectedModule({
 });
 
 const wcV1InitOptions: WalletConnectOptions = {
-    bridge: 'YOUR_CUSTOM_BRIDGE_SERVER',  // replace with your bridge server
+    bridge: 'https://bridge.walletconnect.org',
     qrcodeModalOptions: {
         mobileLinks: ['metamask', 'argent', 'trust']
     },
