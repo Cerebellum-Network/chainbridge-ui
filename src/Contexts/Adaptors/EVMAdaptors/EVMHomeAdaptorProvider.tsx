@@ -38,9 +38,6 @@ export const EVMHomeAdaptorProvider = ({
     setPrimaryWallet // function that can set the primary wallet and/or primary account within that wallet. The wallet that is set needs to be passed in for the first parameter and if you would like to set the primary account, the address of that account also needs to be passed in
   ] = useConnectWallet();
 
-  // TODO: Add mapping of all tokens from config.
-  const tokens = chainbridgeConfig.chains[1].tokens;
-
   const [
     {
       chains, // the list of chains that web3-onboard was initialized with
@@ -49,6 +46,9 @@ export const EVMHomeAdaptorProvider = ({
     },
     setChain // function to call to initiate user to switch chains in their wallet
   ] = useSetChain();
+
+  // Tokens are records of the address and token information for the currently selected chain.
+  const [tokens, setTokens] = useState<Record<TokenConfig["address"], TokenConfig>>({});
 
   const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
 
@@ -169,7 +169,15 @@ export const EVMHomeAdaptorProvider = ({
         setWalletType("unset");
       }
       if (chain) {
+        setTokens(chain.tokens.reduce((acc, currentToken) => {
+          return {
+            ...acc,
+            [currentToken.address]: currentToken,
+          }
+        }, {}));
         handleSetHomeChain(chain.chainId);
+      } else {
+        setTokens({});
       }
     }
   }, [handleSetHomeChain, homeChains, network, setNetworkId]);
