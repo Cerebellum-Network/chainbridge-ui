@@ -19,7 +19,7 @@ const wcV1InitOptions: WalletConnectOptions = {
 
 const wcV2InitOptions: WalletConnectOptions = {
     version: 2,
-    projectId: 'abc123...',  // replace with your WalletConnect project ID
+    projectId: '38473bbcaa1f5860ed436c8b60cb3e94',
 };
 
 // if WalletConnect version isn't set, it will default to V1 until V1 sunset
