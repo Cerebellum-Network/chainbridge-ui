@@ -27,11 +27,12 @@ const walletConnect = walletConnectModule(wcV2InitOptions || wcV1InitOptions);
 
 const ethChains = chainbridgeConfig.chains
     .filter(chain => chain.type === "Ethereum")
-    .map(({ networkId, rpcUrl, nativeTokenSymbol, name}) => ({
+    .map(({ networkId, rpcUrl, nativeTokenSymbol, name, tokens}) => ({
         id: Number(networkId),
         token: nativeTokenSymbol,
         label: name,
         rpcUrl,
+        secondaryTokens: tokens.map(({ address}) => ({ address })),
     }));
 
 export const web3Onboard = init({
