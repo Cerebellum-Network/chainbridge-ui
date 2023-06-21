@@ -176,11 +176,23 @@ export const EVMHomeAdaptorProvider = ({
         setWalletType("unset");
       }
       if (chain) {
+        // `setTokens` maps over the chain tokens. For each token, it checks if it exists in the wallet.
+        // If it does, it uses the wallet's balance. If it doesn't, it sets balance as "0".
+        // The function constructs an object where each key is a token address and its value is the token details and balance.
         setTokens(chain.tokens.reduce((acc, currentToken) => {
+          const matchingTokenInWallet = wallet?.accounts[0]?.secondaryTokens?.find(
+              (walletToken) => walletToken.name === currentToken.symbol
+          );
+
           return {
             ...acc,
-            [currentToken.address]: currentToken,
-          }
+            [currentToken.address]: {
+              ...currentToken,
+              balance: matchingTokenInWallet
+                  ? matchingTokenInWallet.balance
+                  : "0", // set a default value for balance if the token is not found in the wallet
+            },
+          };
         }, {}));
         handleSetHomeChain(chain.chainId);
       } else {
