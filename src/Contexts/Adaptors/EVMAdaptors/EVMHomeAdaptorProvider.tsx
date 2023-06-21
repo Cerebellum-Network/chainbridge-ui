@@ -50,7 +50,7 @@ export const EVMHomeAdaptorProvider = ({
   // Tokens are records of the address and token information for the currently selected chain.
   const [tokens, setTokens] = useState<Record<TokenConfig["address"], TokenConfig>>({});
   const [ethBalance, setEthBalance] = useState(0);
-  const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
+  const [provider, setProvider] = useState<ethers.providers.Web3Provider>();
 
   useEffect(() => {
     if (wallet?.provider) {
@@ -58,7 +58,7 @@ export const EVMHomeAdaptorProvider = ({
       // ethersProvider = new ethers.BrowserProvider(wallet.provider, 'any')
       setProvider(new ethers.providers.Web3Provider(wallet.provider, 'any'))
     } else {
-      setProvider(null)
+      setProvider(undefined);
     }
   }, [wallet]);
 
