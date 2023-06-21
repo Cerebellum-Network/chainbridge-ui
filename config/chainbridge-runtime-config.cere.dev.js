@@ -17,7 +17,7 @@ window.__RUNTIME_CONFIG__ = {
         bridgeAddress: "0x80C8ee1C89c574eB97B3783f0B9C9483EdF8B92E",
         erc20HandlerAddress: "0x53cc2228587EAca7CcE3189f24BC9bd490E43C48",
         rpcUrl:
-          "https://polygon-mumbai.infura.io/v3/178b87e860404572bc217ca53fe594bd",
+          "https://polygon-mumbai.infura.io/v3/0aca1499facc499bb195d2d437f78603",
         blockExplorer: "https://mumbai.polygonscan.com/tx",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
