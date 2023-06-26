@@ -63,6 +63,16 @@ export const EVMHomeAdaptorProvider = ({
   // Network is an id of current chain.
   const [network, setNetwork] = useState<number>();
 
+  const fetchGasPrice = useCallback(async () => {
+    if (!provider) return null;
+    try {
+      const fetchedGasPrice = await provider.getGasPrice();
+      return Number(fetchedGasPrice);
+    } catch (err) {
+      console.error(err);
+    }
+  }, [provider]);
+
   useEffect(() => {
     if (wallet?.provider) {
       // if using ethers v6 this is:
@@ -380,8 +390,11 @@ export const EVMHomeAdaptorProvider = ({
         recipient.substr(2); // recipientAddress (?? bytes)
 
       try {
-        // TODO: Move to single hook to handle fail requests.
-        const gasPrice = Number(await provider?.getGasPrice());
+        const gasPrice = await fetchGasPrice();
+
+        if (!gasPrice) {
+          throw new Error('Failed to fetch gas price');
+        }
 
         const gasPriceCompatibility = await getPriceCompatibility(
           provider,
@@ -496,8 +509,11 @@ export const EVMHomeAdaptorProvider = ({
       return "not ready";
 
     try {
-      // TODO: Move to single hook to handle fail requests.
-      const gasPrice = Number(await provider?.getGasPrice());
+      const gasPrice = await fetchGasPrice();
+
+      if (!gasPrice) {
+        throw new Error('Failed to fetch gas price');
+      }
 
       const gasPriceCompatibility = await getPriceCompatibility(
         provider,
@@ -527,8 +543,11 @@ export const EVMHomeAdaptorProvider = ({
       return "not ready";
 
     try {
-      // TODO: Move to single hook to handle fail requests.
-      const gasPrice = Number(await provider?.getGasPrice());
+      const gasPrice = await fetchGasPrice();
+
+      if (!gasPrice) {
+        throw new Error('Failed to fetch gas price');
+      }
 
       const gasPriceCompatibility = await getPriceCompatibility(
         provider,
