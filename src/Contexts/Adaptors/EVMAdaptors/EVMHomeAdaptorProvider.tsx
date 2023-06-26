@@ -261,7 +261,6 @@ export const EVMHomeAdaptorProvider = ({
     let connected = false;
 
     if (walletType === "Ethereum") {
-      // TODO: handle the case with selectedWallet, logging and setting values to hooks.
       connect();
     }
   }, [
