@@ -19,7 +19,6 @@ const wcV1InitOptions: WalletConnectOptions = {
 
 const wcV2InitOptions: WalletConnectOptions = {
     version: 2,
-    // TODO: Check the casting later.
     projectId: process.env.REACT_APP_WALLET_CONNECT_V2_TOKEN as string,
 };
 
