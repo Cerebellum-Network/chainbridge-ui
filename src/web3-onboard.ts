@@ -1,6 +1,6 @@
 // web3Onboard.ts
 import injectedModule from '@web3-onboard/injected-wallets'
-import walletConnectModule, {WalletConnectOptions} from '@web3-onboard/walletconnect'
+import walletConnectModule, { WalletConnectOptions } from '@web3-onboard/walletconnect'
 import { init } from '@web3-onboard/react'
 import { chainbridgeConfig } from './chainbridgeConfig';
 
