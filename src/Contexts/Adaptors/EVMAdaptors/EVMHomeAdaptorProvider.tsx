@@ -49,8 +49,19 @@ export const EVMHomeAdaptorProvider = ({
 
   // Tokens are records of the address and token information for the currently selected chain.
   const [tokens, setTokens] = useState<Record<TokenConfig["address"], TokenConfig>>({});
+
   const [ethBalance, setEthBalance] = useState(0);
+
   const [provider, setProvider] = useState<ethers.providers.Web3Provider>();
+
+  // State for wallet readiness status. Initially false.
+  const [isReady, setIsReady] = useState(false);
+
+  // State for the connected wallet address. Initially undefined.
+  const [address, updateAddress] = useState<string>();
+
+  // Network is an id of current chain.
+  const [network, setNetwork] = useState<number>();
 
   useEffect(() => {
     if (wallet?.provider) {
@@ -72,10 +83,17 @@ export const EVMHomeAdaptorProvider = ({
     }
   }, [wallet]);
 
-  const isReady = Boolean(wallet) && !connecting;
-  const address = wallet?.accounts[0].address;
-  // Network is an id of current chain.
-  const network = Number(connectedChain?.id);
+  useEffect(() => {
+    setIsReady(Boolean(wallet) && !connecting);
+  }, [wallet, connecting]);
+
+  useEffect(() => {
+    updateAddress(wallet?.accounts[0].address);
+  }, [wallet]);
+
+  useEffect(() => {
+    setNetwork(Number(connectedChain?.id));
+  }, [connectedChain]);
 
   const disconnectWallet = () => {
     if (wallet) {
