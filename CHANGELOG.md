@@ -3,6 +3,9 @@
 ## vNext
 ...
 
+## v0.23.0
+- Disabled WalletConnect v1
+
 ## v0.22.1 
 - Changed Support Service from Telegram to Discord
 

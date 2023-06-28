@@ -112,11 +112,6 @@ const App: React.FC<{}> = () => {
               walletSelect: {
                 wallets: [
                   { walletName: "metamask", preferred: true },
-                  {
-                    walletName: "walletConnect",
-                    preferred: true,
-                    rpc,
-                  },
                 ],
               },
               subscriptions: {
