@@ -232,22 +232,6 @@ export const EVMHomeAdaptorProvider = ({
     console.log("Starting init");
     setInitialising(true);
 
-    wallet?.provider?.on("error", (err: any) => {
-      console.error("Wallet provider error:", err);
-    });
-
-    // On the first connect to a blockchain this event doesn't happen
-    wallet?.provider?.on("chainChanged", (newNetworkId: number) => {
-      console.log("Chain changed:", { networkId, newNetworkId });
-      if (newNetworkId === networkId) return;
-      setNetworkId(
-        newNetworkId.toString().substring(0, 2) === '0x'
-        ? parseInt(newNetworkId.toString(), 16)
-        : newNetworkId
-      );
-      if (isReady && networkSupported) window.location.reload();
-    });
-
     wallet?.provider?.on("accountsChanged", (accounts: string[])=> {
       console.log("Accounts changed:", { walletSelected, account, accounts });
       const walletChanged = walletSelected && account && account !== accounts[0];
