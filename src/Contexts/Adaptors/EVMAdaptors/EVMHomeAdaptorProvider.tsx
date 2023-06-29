@@ -20,8 +20,6 @@ import { decodeAddress } from "@polkadot/util-crypto";
 import { getPriceCompatibility } from "./helpers";
 import { hasTokenSupplies } from "../SubstrateApis/ChainBridgeAPI";
 import { ApiPromise } from "@polkadot/api";
-import { localStorageVars } from "../../../Constants/constants";
-const { ONBOARD_SELECTED_WALLET } = localStorageVars;
 
 export const EVMHomeAdaptorProvider = ({
   children,
