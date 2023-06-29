@@ -28,8 +28,8 @@ window.__RUNTIME_CONFIG__ = {
         tokens: [
           {
             address: "0xcD54b7066839B25A0E5fDf76866D338cc7257179",
-            name: cereTokenName,
-            symbol: cereTokenSymbol,
+            name: "CN",
+            symbol: "CS",
             imageUri: "CEREIcon",
             resourceId:
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
@@ -103,8 +103,8 @@ window.__RUNTIME_CONFIG__ = {
         tokens: [
           {
             address: "0xb8A59CEF67d12C5C75836aEfF1d97943F5A9F662",
-            name: cereTokenName,
-            symbol: cereTokenSymbol,
+            name: "CN",
+            symbol: "CS",
             imageUri: "CEREIcon",
             resourceId:
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",

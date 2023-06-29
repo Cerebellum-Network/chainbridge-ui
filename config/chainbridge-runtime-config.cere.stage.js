@@ -28,8 +28,8 @@ window.__RUNTIME_CONFIG__ = {
         tokens: [
           {
             address: "0xd111d479e23A8342A81ad595Ea1CAF229B3528c3",
-            name: cereTokenName,
-            symbol: cereTokenSymbol,
+            name: "CN",
+            symbol: "CS",
             imageUri: "CEREIcon",
             resourceId:
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
