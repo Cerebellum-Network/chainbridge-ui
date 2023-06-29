@@ -257,11 +257,10 @@ export const EVMHomeAdaptorProvider = ({
       setAccount(accounts[0].toLowerCase())
     });
 
-    const selectedWallet = localStorage.getItem(ONBOARD_SELECTED_WALLET) as string;
-    let connected = false;
-
     if (walletType === "Ethereum") {
-      connect();
+      connect().then(() => {
+        checkWallet();
+      });
     }
   }, [
     checkWallet,
