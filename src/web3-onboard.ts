@@ -38,4 +38,12 @@ const ethChains = chainbridgeConfig.chains
 export const web3Onboard = init({
     wallets: [injected, walletConnect],
     chains: ethChains,
+    accountCenter: {
+        desktop: {
+            enabled: false
+        },
+        mobile: {
+            enabled: false
+        }
+    }
 });
