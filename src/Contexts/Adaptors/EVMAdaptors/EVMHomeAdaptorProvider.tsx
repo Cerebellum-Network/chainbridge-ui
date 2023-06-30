@@ -210,13 +210,17 @@ export const EVMHomeAdaptorProvider = ({
               (walletToken) => walletToken.name === currentToken.symbol
           );
 
+          // Calculate balance by converting from 'wei' to 'ether' and then to the token's units
+          // If `matchingTokenInWallet` does not exist, set balance to "0"
+          const balance = matchingTokenInWallet
+              ? +matchingTokenInWallet.balance * Math.pow(10, 18) / Math.pow(10, currentToken.decimals || 10)
+              : "0";
+
           return {
             ...acc,
             [currentToken.address]: {
               ...currentToken,
-              balance: matchingTokenInWallet
-                  ? matchingTokenInWallet.balance
-                  : "0", // set a default value for balance if the token is not found in the wallet
+              balance,
             },
           };
         }, {}));
@@ -225,7 +229,7 @@ export const EVMHomeAdaptorProvider = ({
         setTokens({});
       }
     }
-  }, [handleSetHomeChain, homeChains, network, setNetworkId]);
+  }, [handleSetHomeChain, homeChains, network, setNetworkId, wallet?.accounts]);
 
   useEffect(() => {
     if (initialising || homeBridge) return;
