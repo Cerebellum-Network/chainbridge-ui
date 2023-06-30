@@ -17,7 +17,7 @@ window.__RUNTIME_CONFIG__ = {
         bridgeAddress: "0xBDc040b15561CFC9ED1Ce049DE8bEAbf0b520b33",
         erc20HandlerAddress: "0x8Ee8876d13e79b846fb6c3e5Ffe226a2e111387a",
         rpcUrl:
-          "https://polygon-mumbai.infura.io/v3/178b87e860404572bc217ca53fe594bd",
+          "https://polygon-mumbai.infura.io/v3/0aca1499facc499bb195d2d437f78603",
         blockExplorer: "https://mumbai.polygonscan.com/tx",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
@@ -28,8 +28,8 @@ window.__RUNTIME_CONFIG__ = {
         tokens: [
           {
             address: "0xd111d479e23A8342A81ad595Ea1CAF229B3528c3",
-            name: cereTokenName,
-            symbol: cereTokenSymbol,
+            name: "CN",
+            symbol: "CS",
             imageUri: "CEREIcon",
             resourceId:
               "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
