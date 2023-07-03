@@ -1,6 +1,9 @@
 # CHANGELOG
 
 ## vNext
+...
+
+## v0.24.0
 - Migrated to WalletConnect v2
 
 ## v0.23.0
