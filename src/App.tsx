@@ -13,10 +13,10 @@ import { ChainbridgeProvider } from "./Contexts/ChainbridgeContext";
 import AppWrapper from "./Layouts/AppWrapper";
 import { NetworkManagerProvider } from "./Contexts/NetworkManagerContext";
 import { chainbridgeConfig } from "./chainbridgeConfig";
-import { Web3Provider } from "@chainsafe/web3-context";
-import { utils } from "ethers";
+import { Web3OnboardProvider } from '@web3-onboard/react'
 import "@chainsafe/common-theme/dist/font-faces.css";
 import { localStorageVars, blockchainChainIds } from "./Constants/constants";
+import { web3Onboard } from "./web3-onboard";
 
 const { UNHANDLED_REJECTION, ONBOARD_SELECTED_WALLET } = localStorageVars;
 
@@ -68,19 +68,6 @@ const App: React.FC<{}> = () => {
     }
   });
 
-  const tokens = chainbridgeConfig.chains
-    .filter((c) => c.type === "Ethereum")
-    .reduce((tca, bc: any) => {
-      if (bc.networkId) {
-        return {
-          ...tca,
-          [bc.networkId]: bc.tokens,
-        };
-      } else {
-        return tca;
-      }
-    }, {});
-
   return (
     <ErrorBoundary
       fallback={({ error, componentStack, eventId, resetError }) => (
@@ -104,29 +91,8 @@ const App: React.FC<{}> = () => {
       <ThemeSwitcher themes={{ light: lightTheme }}>
         <CssBaseline />
         <ToasterProvider autoDismiss>
-          <Web3Provider
-            tokensToWatch={tokens}
-            networkIds={[networkId]}
-            onboardConfig={{
-              dappId: process.env.REACT_APP_BLOCKNATIVE_DAPP_ID,
-              walletSelect: {
-                wallets: [
-                  { walletName: "metamask", preferred: true },
-                ],
-              },
-              subscriptions: {
-                network: (newNetworkId) => {
-                  console.log("network onboard subscription: ", { networkId, newNetworkId });
-                  const supported = chainbridgeConfig.chains.find(chain => chain.networkId === newNetworkId);
-                  if (supported) setNetworkId(newNetworkId);
-                },
-                balance: (amount) =>
-                  amount && console.log("balance onboard subscription: ", utils.formatEther(amount)),
-              },
-            }}
-            checkNetwork={false}
-            gasPricePollingInterval={120}
-            gasPriceSetting="fast"
+          <Web3OnboardProvider
+            web3Onboard={web3Onboard}
           >
             <NetworkManagerProvider>
               <ChainbridgeProvider chains={chains}>
@@ -137,7 +103,7 @@ const App: React.FC<{}> = () => {
                 </Router>
               </ChainbridgeProvider>
             </NetworkManagerProvider>
-          </Web3Provider>
+          </Web3OnboardProvider>
         </ToasterProvider>
       </ThemeSwitcher>
     </ErrorBoundary>
