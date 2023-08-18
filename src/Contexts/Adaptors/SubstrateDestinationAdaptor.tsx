@@ -1,4 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
+import {
+  web3Accounts,
+  web3Enable,
+} from "@polkadot/extension-dapp";
 import { DestinationBridgeContext } from "../DestinationBridgeContext";
 import { useNetworkManager } from "../NetworkManagerContext";
 import {
@@ -43,6 +47,8 @@ export const SubstrateDestinationAdaptorProvider = ({
   } = useNetworkManager();
 
   const [initialising, setInitialising] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+
   useEffect(() => {
     // Once the chain ID has been set in the network context, the destination configuration will be automatically
     // set thus triggering this
@@ -254,6 +260,14 @@ export const SubstrateDestinationAdaptorProvider = ({
     }
   }, [transactionStatus, fallback, initFallbackMechanism]);
 
+  useEffect(() => {
+    web3Enable('Cere Bridge').then(() => {
+      web3Accounts().then((res) => {
+        setAddresses(res);
+      })
+    });
+  }, [web3Accounts, web3Enable])
+
   return (
     <DestinationBridgeContext.Provider
       value={{
@@ -261,6 +275,7 @@ export const SubstrateDestinationAdaptorProvider = ({
           if (api?.isConnected) await api?.disconnect();
           setApi(undefined);
         },
+        addresses,
       }}
     >
       {children}

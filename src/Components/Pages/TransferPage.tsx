@@ -750,20 +750,40 @@ const TransferPage = () => {
                     </section>
                   </section>
                   <section>
-                    <AddressInput
-                      disabled={!destinationChainConfig}
-                      name="receiver"
-                      label="Destination Address"
-                      placeholder="Please enter the receiving address..."
-                      className={classes.address}
-                      classNames={{
-                        input: classes.addressInput,
-                      }}
-                      senderAddress={`${address}`}
-                      sendToSameAccountHelper={
-                        destinationChainConfig?.type === homeConfig?.type
-                      }
-                    />
+                      {destinationBridge.addresses.length ? (
+                          <SelectInput
+                              label="Select a destination account"
+                              className={classes.generalInput}
+                              options={destinationBridge.addresses.map((acc, i) => ({
+                                  label: acc.meta.name,
+                                  value: i,
+                              }))}
+                              onChange={(index) => {
+                                  console.log("Next Account is", destinationBridge.addresses[index].address);
+                                  setPreflightDetails({
+                                      ...preflightDetails,
+                                      receiver: destinationBridge.addresses[index].address
+                                  });
+                              }}
+                              value={destinationBridge.addresses.findIndex((v) => v.address === address)}
+                              placeholder="Select a destination account"
+                          />
+                      ): (
+                          <AddressInput
+                              disabled={!destinationChainConfig}
+                              name="receiver"
+                              label="Destination Address"
+                              placeholder="Please enter the receiving address..."
+                              className={classes.address}
+                              classNames={{
+                                  input: classes.addressInput,
+                              }}
+                              senderAddress={`${address}`}
+                              sendToSameAccountHelper={
+                                  destinationChainConfig?.type === homeConfig?.type
+                              }
+                          />
+                      )}
                   </section>
                   <FeesFormikWrapped
                     amountFormikName="tokenAmount"

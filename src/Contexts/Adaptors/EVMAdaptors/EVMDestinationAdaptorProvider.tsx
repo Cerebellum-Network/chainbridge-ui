@@ -317,6 +317,7 @@ export const EVMDestinationAdaptorProvider = ({
     <DestinationBridgeContext.Provider
       value={{
         disconnect: async () => {},
+        addresses: [],
       }}
     >
       {children}
