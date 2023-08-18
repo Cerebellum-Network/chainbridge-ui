@@ -12,6 +12,7 @@ import {
 } from "@chainsafe/common-components";
 import { Form, Formik } from "formik";
 import AddressInput from "../Custom/AddressInput";
+import AddressSelectInput from "../Custom/AddressSelectInput";
 import clsx from "clsx";
 import TransferActiveModal from "../../Modules/TransferActiveModal";
 import { useChainbridge } from "../../Contexts/ChainbridgeContext";
@@ -751,22 +752,9 @@ const TransferPage = () => {
                   </section>
                   <section>
                       {destinationBridge.addresses.length ? (
-                          <SelectInput
-                              label="Select a destination account"
-                              className={classes.generalInput}
-                              options={destinationBridge.addresses.map((acc, i) => ({
-                                  label: acc.meta.name,
-                                  value: i,
-                              }))}
-                              onChange={(index) => {
-                                  console.log("Next Account is", destinationBridge.addresses[index].address);
-                                  setPreflightDetails({
-                                      ...preflightDetails,
-                                      receiver: destinationBridge.addresses[index].address
-                                  });
-                              }}
-                              value={destinationBridge.addresses.findIndex((v) => v.address === address)}
-                              placeholder="Select a destination account"
+                          <AddressSelectInput
+                              name="receiver"
+                              addresses={destinationBridge.addresses}
                           />
                       ): (
                           <AddressInput
