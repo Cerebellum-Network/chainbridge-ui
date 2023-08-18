@@ -2,6 +2,7 @@ import React from "react";
 import {SelectInput} from "@chainsafe/common-components";
 import {useField} from "formik";
 import {createStyles, ITheme, makeStyles} from "@chainsafe/common-theme";
+import {DestinationChainContext} from "../../Contexts/Adaptors/interfaces";
 
 const useStyles = makeStyles(({constants}: ITheme) =>
     createStyles({
@@ -12,7 +13,7 @@ const useStyles = makeStyles(({constants}: ITheme) =>
 );
 
 interface IAddressSelectInput {
-    addresses: [];
+    addresses: DestinationChainContext["addresses"];
     name: string;
 };
 
@@ -28,12 +29,9 @@ const AddressSelectInput: React.FC<IAddressSelectInput> =
             <div className={classes.root}>
                 <SelectInput
                     label="Select a destination account"
-                    options={addresses.map((acc, i) => ({
-                        label: acc.meta.name,
-                        value: i,
-                    }))}
-                    onChange={(index) => {
-                        helpers.setValue(addresses[index].address);
+                    options={addresses}
+                    onChange={(address) => {
+                        helpers.setValue(address);
                     }}
                     placeholder="Select a destination account"
                 />
