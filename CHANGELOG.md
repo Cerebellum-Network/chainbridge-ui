@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ## vNext
-...
+- Added ability to select destination address from Polkadot-JS Web Extension or paste it manually.
 
 ## v0.24.0
 - Migrated to WalletConnect v2

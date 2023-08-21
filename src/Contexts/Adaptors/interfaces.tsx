@@ -68,4 +68,5 @@ export interface HomeChainAdaptorContext {
 
 export interface DestinationChainContext {
   disconnect: () => Promise<void>;
+  addresses: Array<{ value: string; label: string }>;
 }

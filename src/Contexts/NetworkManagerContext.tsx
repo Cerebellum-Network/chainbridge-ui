@@ -285,7 +285,7 @@ const NetworkManagerProvider = ({ children }: INetworkManagerProviderProps) => {
       return (
         <DestinationBridgeContext.Provider
           value={{
-            disconnect: async () => {},
+            disconnect: async () => {}, addresses: [],
           }}
         >
           {children}

@@ -1,4 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
+import {
+  web3Accounts,
+  web3Enable,
+} from "@polkadot/extension-dapp";
 import { DestinationBridgeContext } from "../DestinationBridgeContext";
 import { useNetworkManager } from "../NetworkManagerContext";
 import {
@@ -7,7 +11,7 @@ import {
   VoteStatus,
   getTransferTxHashByNonce,
 } from "./SubstrateApis/ChainBridgeAPI";
-import { IDestinationBridgeProviderProps } from "./interfaces";
+import { DestinationChainContext, IDestinationBridgeProviderProps } from "./interfaces";
 
 import { ApiPromise } from "@polkadot/api";
 import {
@@ -43,6 +47,8 @@ export const SubstrateDestinationAdaptorProvider = ({
   } = useNetworkManager();
 
   const [initialising, setInitialising] = useState(false);
+  const [addresses, setAddresses] = useState<DestinationChainContext["addresses"]>([]);
+
   useEffect(() => {
     // Once the chain ID has been set in the network context, the destination configuration will be automatically
     // set thus triggering this
@@ -254,6 +260,20 @@ export const SubstrateDestinationAdaptorProvider = ({
     }
   }, [transactionStatus, fallback, initFallbackMechanism]);
 
+  useEffect(() => {
+    web3Enable('Cere Bridge').then(() => {
+      web3Accounts().then((injectedAccountsWithMeta) => {
+        const transformAddress = (address: string) => `${address.slice(0,5)}...${address.slice(-5)}`;
+
+        setAddresses(injectedAccountsWithMeta.map(({address, meta}) => ({
+            value: address,
+            label: `${meta.name} ( ${transformAddress(address)} )`,
+        })));
+
+      })
+    });
+  }, [web3Accounts, web3Enable])
+
   return (
     <DestinationBridgeContext.Provider
       value={{
@@ -261,6 +281,7 @@ export const SubstrateDestinationAdaptorProvider = ({
           if (api?.isConnected) await api?.disconnect();
           setApi(undefined);
         },
+        addresses,
       }}
     >
       {children}
