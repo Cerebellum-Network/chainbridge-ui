@@ -53,7 +53,7 @@ const useStyles = makeStyles(
       },
       pageArea: {
         height: "100%",
-        overflow: "auto",
+        overflow: "visible",
         boxShadow: "20px 4px 72px rgba(85, 85, 85, 0.15)",
         borderRadius: 4,
         width: "fit-content",
