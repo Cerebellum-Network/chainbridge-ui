@@ -783,7 +783,7 @@ const TransferPage = () => {
                       {isDestinationAddressListExists && (
                           <CheckboxInput
                               className={classes.destinationAddressCheckbox}
-                              label="Paste Address Manually"
+                              label="Paste a destination address manually"
                               value={shouldPasteDestinationAddressManually}
                               onChange={() => setShouldPasteDestinationAddressManually(!shouldPasteDestinationAddressManually)}
                           />

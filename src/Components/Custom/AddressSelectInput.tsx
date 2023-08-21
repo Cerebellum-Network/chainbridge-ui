@@ -18,12 +18,12 @@ const AddressSelectInput: React.FC<IAddressSelectInput> =
         return (
             <SelectInput
                 value={field.value}
-                label="Select a destination account"
+                label="Select a destination address from Polkadot.js Extension"
                 options={addresses}
                 onChange={(address) => {
                     helpers.setValue(address);
                 }}
-                placeholder="Select a destination account"
+                placeholder="Select a destination address"
             />
         );
     };
