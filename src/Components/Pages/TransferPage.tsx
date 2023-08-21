@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { makeStyles, createStyles, ITheme } from "@chainsafe/common-theme";
 import AboutDrawer from "../../Modules/AboutDrawer";
 import ChangeNetworkDrawer from "../../Modules/ChangeNetworkDrawer";
 import PreflightModalTransfer from "../../Modules/PreflightModalTransfer";
 import {
-  Button,
-  Typography,
-  // QuestionCircleSvg,
-  SelectInput,
-  NavLink,
+    Button,
+    Typography,
+    // QuestionCircleSvg,
+    SelectInput,
+    NavLink,
+    CheckboxInput,
 } from "@chainsafe/common-components";
 import { Form, Formik } from "formik";
 import AddressInput from "../Custom/AddressInput";
@@ -279,6 +280,9 @@ const useStyles = makeStyles(({ constants, palette }: ITheme) =>
       marginBottom: constants.generalUnit * 3,
       fontSize: 8,
     },
+    destinationAddressCheckbox: {
+        margin: "24px 0px",
+    },
     addressInput: {
       "& > div > input": {
         fontSize: "12px !important",
@@ -412,6 +416,7 @@ const TransferPage = () => {
     checkSupplies,
   } = useChainbridge();
 
+  const [isPasteDestinationAddressManually, setIsPasteDestinationAddressManually] = useState(false);
   const { accounts, selectAccount, disconnect } = useHomeBridge();
   const [aboutOpen, setAboutOpen] = useState<boolean>(false);
   const [walletConnecting, setWalletConnecting] = useState(false);
@@ -424,6 +429,8 @@ const TransferPage = () => {
     tokenAmount: 0,
     tokenSymbol: "",
   });
+
+  const isDestinationBridgeAddressList = useMemo(() => Boolean(destinationBridge.addresses.length), [destinationBridge.addresses]);
 
   // This is a workaround for Ethereum networks uncaught exception bug
   useEffect(() => {
@@ -751,7 +758,8 @@ const TransferPage = () => {
                     </section>
                   </section>
                   <section>
-                      {destinationBridge.addresses.length ? (
+                      {!isPasteDestinationAddressManually &&
+                      isDestinationBridgeAddressList ? (
                           <AddressSelectInput
                               name="receiver"
                               addresses={destinationBridge.addresses}
@@ -770,6 +778,14 @@ const TransferPage = () => {
                               sendToSameAccountHelper={
                                   destinationChainConfig?.type === homeConfig?.type
                               }
+                          />
+                      )}
+                      {isDestinationBridgeAddressList && (
+                          <CheckboxInput
+                              className={classes.destinationAddressCheckbox}
+                              label="Paste Address Manually"
+                              value={isPasteDestinationAddressManually}
+                              onChange={() => setIsPasteDestinationAddressManually(!isPasteDestinationAddressManually)}
                           />
                       )}
                   </section>
