@@ -416,7 +416,7 @@ const TransferPage = () => {
     checkSupplies,
   } = useChainbridge();
 
-  const [isPasteDestinationAddressManually, setIsPasteDestinationAddressManually] = useState(false);
+  const [shouldPasteDestinationAddressManually, setShouldPasteDestinationAddressManually] = useState(false);
   const { accounts, selectAccount, disconnect } = useHomeBridge();
   const [aboutOpen, setAboutOpen] = useState<boolean>(false);
   const [walletConnecting, setWalletConnecting] = useState(false);
@@ -758,7 +758,7 @@ const TransferPage = () => {
                     </section>
                   </section>
                   <section>
-                      {!isPasteDestinationAddressManually &&
+                      {!shouldPasteDestinationAddressManually &&
                       isDestinationAddressListExists ? (
                           <AddressSelectInput
                               name="receiver"
@@ -784,8 +784,8 @@ const TransferPage = () => {
                           <CheckboxInput
                               className={classes.destinationAddressCheckbox}
                               label="Paste Address Manually"
-                              value={isPasteDestinationAddressManually}
-                              onChange={() => setIsPasteDestinationAddressManually(!isPasteDestinationAddressManually)}
+                              value={shouldPasteDestinationAddressManually}
+                              onChange={() => setShouldPasteDestinationAddressManually(!shouldPasteDestinationAddressManually)}
                           />
                       )}
                   </section>
