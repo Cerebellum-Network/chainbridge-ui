@@ -263,9 +263,11 @@ export const SubstrateDestinationAdaptorProvider = ({
   useEffect(() => {
     web3Enable('Cere Bridge').then(() => {
       web3Accounts().then((injectedAccountsWithMeta) => {
+        const transformAddress = (address: string) => `${address.slice(0,5)}...${address.slice(-5)}`;
+
         setAddresses(injectedAccountsWithMeta.map(({address, meta}) => ({
             value: address,
-            label: meta.name || address,
+            label: `${meta.name} ( ${transformAddress(address)} )`,
         })));
 
       })
