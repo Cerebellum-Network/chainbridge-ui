@@ -430,7 +430,7 @@ const TransferPage = () => {
     tokenSymbol: "",
   });
 
-  const isDestinationBridgeAddressList = useMemo(() => Boolean(destinationBridge.addresses.length), [destinationBridge.addresses]);
+  const isDestinationAddressListExists = useMemo(() => Boolean(destinationBridge.addresses.length), [destinationBridge.addresses]);
 
   // This is a workaround for Ethereum networks uncaught exception bug
   useEffect(() => {
@@ -759,7 +759,7 @@ const TransferPage = () => {
                   </section>
                   <section>
                       {!isPasteDestinationAddressManually &&
-                      isDestinationBridgeAddressList ? (
+                      isDestinationAddressListExists ? (
                           <AddressSelectInput
                               name="receiver"
                               addresses={destinationBridge.addresses}
@@ -780,7 +780,7 @@ const TransferPage = () => {
                               }
                           />
                       )}
-                      {isDestinationBridgeAddressList && (
+                      {isDestinationAddressListExists && (
                           <CheckboxInput
                               className={classes.destinationAddressCheckbox}
                               label="Paste Address Manually"
