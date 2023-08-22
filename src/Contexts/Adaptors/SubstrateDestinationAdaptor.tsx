@@ -262,7 +262,7 @@ export const SubstrateDestinationAdaptorProvider = ({
 
   useEffect(() => {
     web3Enable('Cere Bridge').then(() => {
-      web3Accounts().then((injectedAccountsWithMeta) => {
+      web3Accounts({ ss58Format: Number(process.env.REACT_APP_SS58_PREFIX) }).then((injectedAccountsWithMeta) => {
         const transformAddress = (address: string) => `${address.slice(0,5)}...${address.slice(-5)}`;
 
         setAddresses(injectedAccountsWithMeta.map(({address, meta}) => ({
