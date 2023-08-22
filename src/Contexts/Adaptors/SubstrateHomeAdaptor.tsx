@@ -180,7 +180,7 @@ export const SubstrateHomeAdaptorProvider = ({
         .then(() => {
           // web3Account resolves with the injected accounts
           // or an empty array
-          web3Accounts()
+          web3Accounts({ ss58Format: Number(process.env.REACT_APP_SS58_PREFIX) })
             .then((accounts) => {
               return accounts.map(({ address, meta }) => ({
                 address,
@@ -223,7 +223,7 @@ export const SubstrateHomeAdaptorProvider = ({
       destinationChainId: number
     ) => {
       if (api && address) {
-        const allAccounts = await web3Accounts();
+        const allAccounts = await web3Accounts({ ss58Format: Number(process.env.REACT_APP_SS58_PREFIX) });
         const targetAccount = allAccounts.find(
           (item) => item.address === address
         );
