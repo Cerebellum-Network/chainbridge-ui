@@ -3,6 +3,9 @@
 ## vNext
 ...
 
+## v0.26.0
+- Applied to Cere ss58 prefix for Polkadot-JS Extension accounts.
+
 ## v0.25.0
 - Added ability to select destination address from Polkadot-JS Web Extension or paste it manually.
 
