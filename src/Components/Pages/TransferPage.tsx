@@ -392,6 +392,7 @@ type PreflightDetails = {
 const TransferPage = () => {
   const classes = useStyles();
   const {
+    homeChains,
     walletType,
     setWalletType,
     handleSetHomeChain,
@@ -686,6 +687,19 @@ const TransferPage = () => {
                     disabled: !homeConfig || !address || props.isValidating,
                   })}
                 >
+                  <section>
+                      <SelectInput
+                          label="Current Network"
+                          className={classes.generalInput}
+                          disabled={!homeConfig}
+                          options={homeChains.map((dc) => ({
+                              label: dc.name,
+                              value: dc.chainId,
+                          }))}
+                          onChange={(value) => handleSetHomeChain(value)}
+                          value={homeConfig?.chainId}
+                      />
+                  </section>
                   <section>
                     <SelectInput
                       label="Destination Network"
