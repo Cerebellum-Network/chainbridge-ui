@@ -1,6 +1,9 @@
 # CHANGELOG
 
 ## vNext
+...
+
+## v0.27.0
 - Added the ability to select a HomeChain for EVM-based networks.
 
 ## v0.26.0
