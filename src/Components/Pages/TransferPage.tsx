@@ -634,14 +634,25 @@ const TransferPage = () => {
                   Change
                 </Typography>
               </div>
-              <div className={classes.networkName}>
-                {walletType === "Ethereum" ? (
-                  <ETHIcon className={classes.networkIcon} />
-                ) : (
-                  <CEREIcon className={classes.networkIcon} />
-                )}
-                {homeConfig?.name}
-              </div>
+              {walletType === "Substrate" ? (
+                  <div className={classes.networkName}>
+                  <CEREIcon className={classes.networkIcon}/>
+                  {homeConfig?.name}
+               </div>
+              ): (
+                <section>
+                  <SelectInput
+                      className={classes.generalInput}
+                      disabled={!homeConfig}
+                      options={homeChains.map((dc) => ({
+                          label: dc.name,
+                          value: Number(dc.networkId),
+                      }))}
+                      onChange={(chainId) => setChain({ chainId })}
+                      value={homeConfig?.networkId}
+                  />
+                </section>
+              )}
             </section>
             <div>
               {isReady &&
@@ -689,19 +700,6 @@ const TransferPage = () => {
                     disabled: !homeConfig || !address || props.isValidating,
                   })}
                 >
-                  <section>
-                      <SelectInput
-                          label="Current Network"
-                          className={classes.generalInput}
-                          disabled={!homeConfig}
-                          options={homeChains.map((dc) => ({
-                              label: dc.name,
-                              value: Number(dc.networkId),
-                          }))}
-                          onChange={(chainId) => setChain({ chainId })}
-                          value={homeConfig?.networkId}
-                      />
-                  </section>
                   <section>
                     <SelectInput
                       label="Destination Network"
