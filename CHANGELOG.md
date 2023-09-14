@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ## vNext
-...
+- Added the ability to select a HomeChain for EVM-based networks.
 
 ## v0.25.0
 - Added ability to select destination address from Polkadot-JS Web Extension or paste it manually.
