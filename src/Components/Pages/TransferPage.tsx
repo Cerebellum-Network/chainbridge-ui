@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { makeStyles, createStyles, ITheme } from "@chainsafe/common-theme";
+import { useSetChain } from "@web3-onboard/react";
 import AboutDrawer from "../../Modules/AboutDrawer";
 import ChangeNetworkDrawer from "../../Modules/ChangeNetworkDrawer";
 import PreflightModalTransfer from "../../Modules/PreflightModalTransfer";
@@ -392,6 +393,7 @@ type PreflightDetails = {
 const TransferPage = () => {
   const classes = useStyles();
   const {
+    homeChains,
     walletType,
     setWalletType,
     handleSetHomeChain,
@@ -416,6 +418,7 @@ const TransferPage = () => {
     checkSupplies,
   } = useChainbridge();
 
+  const [, setChain] = useSetChain();
   const [shouldPasteDestinationAddressManually, setShouldPasteDestinationAddressManually] = useState(false);
   const { accounts, selectAccount, disconnect } = useHomeBridge();
   const [aboutOpen, setAboutOpen] = useState<boolean>(false);
@@ -631,14 +634,25 @@ const TransferPage = () => {
                   Change
                 </Typography>
               </div>
-              <div className={classes.networkName}>
-                {walletType === "Ethereum" ? (
-                  <ETHIcon className={classes.networkIcon} />
-                ) : (
-                  <CEREIcon className={classes.networkIcon} />
-                )}
-                {homeConfig?.name}
-              </div>
+              {walletType === "Substrate" ? (
+                  <div className={classes.networkName}>
+                  <CEREIcon className={classes.networkIcon}/>
+                  {homeConfig?.name}
+               </div>
+              ): (
+                <section>
+                  <SelectInput
+                      className={classes.generalInput}
+                      disabled={!homeConfig}
+                      options={homeChains.map((dc) => ({
+                          label: dc.name,
+                          value: Number(dc.networkId),
+                      }))}
+                      onChange={(chainId) => setChain({ chainId })}
+                      value={homeConfig?.networkId}
+                  />
+                </section>
+              )}
             </section>
             <div>
               {isReady &&

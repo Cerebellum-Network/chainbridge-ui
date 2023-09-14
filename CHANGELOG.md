@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ## vNext
-...
+- Added the ability to select a HomeChain for EVM-based networks.
 
 ## v0.26.0
 - Applied to Cere ss58 prefix for Polkadot-JS Extension accounts.
