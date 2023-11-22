@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master-cere
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
