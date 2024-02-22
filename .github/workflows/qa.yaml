@@ -1,4 +1,4 @@
-name: Release to dev
+name: Release to QA
 on:
   push:
     branches:
