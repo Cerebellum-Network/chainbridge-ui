@@ -50,7 +50,7 @@ window.__RUNTIME_CONFIG__ = {
       {
         chainId: 1,
         networkId: 2,
-        name: "Cere Devnet",
+        name: "Cere Qanet",
         decimals: cereTokenDecimals,
         rpcUrl: "wss://rpc.qanet.cere.network/ws",
         blockExplorer:
