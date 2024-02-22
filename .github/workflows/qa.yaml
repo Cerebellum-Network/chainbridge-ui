@@ -12,7 +12,7 @@ jobs:
       runs-on: '["self-hosted", "cere-network-xlarge"]'
       build_container: 'node:16-buster'
       deploy_container: 'ubuntu:20.04'
-      install_packages_command: 'cp .env.dev .env; sh ./scripts/copy-dev-config.sh; yarn install'
+      install_packages_command: 'cp .env.qa .env; sh ./scripts/copy-qa-config.sh; yarn install'
       build_command: 'yarn build'
       path_to_static_files_to_upload: 'build'
     secrets:
