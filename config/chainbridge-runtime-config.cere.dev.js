@@ -12,12 +12,13 @@ window.__RUNTIME_CONFIG__ = {
       {
         chainId: 2,
         networkId: 80001,
-        name: "Polygon Mumbai",
+        name: "Polygon Amoy",
         decimals: cereTokenDecimals,
-        bridgeAddress: "0x80C8ee1C89c574eB97B3783f0B9C9483EdF8B92E",
-        erc20HandlerAddress: "0x53cc2228587EAca7CcE3189f24BC9bd490E43C48",
+        bridgeAddress: "0xf2686661e3297d737D7Ae709A433639151d11Ed6",
+        erc20HandlerAddress: "0xCA8C0076262797f7f35E3874e7E208c9e394195E",
         rpcUrl:
-          "https://polygon-mumbai.infura.io/v3/0aca1499facc499bb195d2d437f78603",
+            "http://rpc.ankr.com/polygon_amoy/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+        // Todo: replace to Amoy
         blockExplorer: "https://mumbai.polygonscan.com/tx",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
@@ -27,12 +28,12 @@ window.__RUNTIME_CONFIG__ = {
         availableAsHomeNetwork: true,
         tokens: [
           {
-            address: "0xcD54b7066839B25A0E5fDf76866D338cc7257179",
+            address: "0x8C7B1504d5E7Aa3e2E38353CFFd7526019b3cBBB",
             name: "CN",
             symbol: "CS",
             imageUri: "CEREIcon",
             resourceId:
-              "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
+                "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
             decimals: cereTokenDecimals,
             isDoubleApproval: false,
           },
@@ -54,7 +55,7 @@ window.__RUNTIME_CONFIG__ = {
         decimals: cereTokenDecimals,
         rpcUrl: "wss://rpc.devnet.cere.network/ws",
         blockExplorer:
-          "https://explorer.cere.network/?rpc=wss%3A%2F%2Farchive.devnet.cere.network%2Fws#/explorer/query",
+            "https://explorer.cere.network/?rpc=wss%3A%2F%2Farchive.devnet.cere.network%2Fws#/explorer/query",
         rpcFallbackUrls: ["wss://archive.devnet.cere.network/ws"],
         type: "Substrate",
         nativeTokenSymbol: "CERE",
@@ -73,7 +74,7 @@ window.__RUNTIME_CONFIG__ = {
             symbol: cereTokenSymbol,
             imageUri: "CEREIcon",
             resourceId:
-              "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
+                "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
             decimals: cereTokenDecimals,
           },
         ],
@@ -107,7 +108,7 @@ window.__RUNTIME_CONFIG__ = {
             symbol: "CS",
             imageUri: "CEREIcon",
             resourceId:
-              "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
+                "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
             decimals: cereTokenDecimals,
             isDoubleApproval: false,
           },
