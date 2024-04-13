@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - dev-cere
+      - fix/*
   workflow_dispatch:
 
 jobs:
