@@ -11,14 +11,13 @@ window.__RUNTIME_CONFIG__ = {
     chains: [
       {
         chainId: 2,
-        networkId: 80001,
-        name: "Polygon Mumbai",
+        networkId: 80002,
+        name: "Polygon Amoy",
         decimals: cereTokenDecimals,
-        bridgeAddress: "0xBDc040b15561CFC9ED1Ce049DE8bEAbf0b520b33",
-        erc20HandlerAddress: "0x8Ee8876d13e79b846fb6c3e5Ffe226a2e111387a",
-        rpcUrl:
-          "https://polygon-mumbai.infura.io/v3/0aca1499facc499bb195d2d437f78603",
-        blockExplorer: "https://mumbai.polygonscan.com/tx",
+        bridgeAddress: "0xD134be2c9d23a5e1d7b632633dDD832066D39dE8",
+        erc20HandlerAddress: "0x4bF13AF921eb468F6B0Fc19f9b41a2Fd7769D99C",
+        rpcUrl: "https://rpc.ankr.com/polygon_amoy/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+        blockExplorer: "https://www.oklink.com/amoy/tx",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
         defaultGasPrice: 800,
@@ -27,12 +26,12 @@ window.__RUNTIME_CONFIG__ = {
         availableAsHomeNetwork: true,
         tokens: [
           {
-            address: "0xd111d479e23A8342A81ad595Ea1CAF229B3528c3",
+            address: "0x6A077176E22c05a9607A32cdc9fE23Dd6db2A9Ca",
             name: "CN",
             symbol: "CS",
             imageUri: "CEREIcon",
             resourceId:
-              "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
+                "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
             decimals: cereTokenDecimals,
             isDoubleApproval: false,
           },
@@ -54,7 +53,7 @@ window.__RUNTIME_CONFIG__ = {
         decimals: cereTokenDecimals,
         rpcUrl: "wss://rpc.testnet.cere.network/ws",
         blockExplorer:
-          "https://explorer.cere.network/?rpc=wss%3A%2F%2Farchive.testnet.cere.network%2Fws#/explorer/query",
+            "https://explorer.cere.network/?rpc=wss%3A%2F%2Farchive.testnet.cere.network%2Fws#/explorer/query",
         rpcFallbackUrls: ["wss://archive.testnet.cere.network/ws"],
         type: "Substrate",
         nativeTokenSymbol: "CERE",
@@ -73,7 +72,7 @@ window.__RUNTIME_CONFIG__ = {
             symbol: cereTokenSymbol,
             imageUri: "CEREIcon",
             resourceId:
-              "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
+                "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
             decimals: cereTokenDecimals,
           },
         ],
@@ -89,25 +88,25 @@ window.__RUNTIME_CONFIG__ = {
       },
       {
         chainId: 0,
-        networkId: 5,
-        name: "Ethereum Goerli",
+        networkId: 11155111,
+        name: "Ethereum Sepolia",
         decimals: cereTokenDecimals,
-        rpcUrl: "https://goerli.infura.io/v3/0aca1499facc499bb195d2d437f78603",
-        blockExplorer: "https://goerli.etherscan.io/tx",
-        bridgeAddress: "0x4E297d17A3d945Ed96dBbD205317501e92d8D6E8",
-        erc20HandlerAddress: "0x92c1576845703089CF6c0788379ED81f75F45dd5",
+        rpcUrl: "https://rpc.ankr.com/ethereum_sepolia/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+        blockExplorer: "https://sepolia.etherscan.io/tx",
+        bridgeAddress: "0xD134be2c9d23a5e1d7b632633dDD832066D39dE8",
+        erc20HandlerAddress: "0x6A077176E22c05a9607A32cdc9fE23Dd6db2A9Ca",
         type: "Ethereum",
         nativeTokenSymbol: "ETH",
         defaultGasPrice: 400,
         availableAsHomeNetwork: true,
         tokens: [
           {
-            address: "0x0b10e304088b2BA2B2acfD2f72573FAaD31a13A5",
+            address: "0x244A84580B96C49BDf552E18613227eF30951b04",
             name: cereTokenName,
             symbol: cereTokenSymbol,
             imageUri: "CEREIcon",
             resourceId:
-              "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
+                "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
             decimals: cereTokenDecimals,
             isDoubleApproval: false,
           },

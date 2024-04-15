@@ -11,15 +11,14 @@ window.__RUNTIME_CONFIG__ = {
     chains: [
       {
         chainId: 2,
-        networkId: 80001,
+        networkId: 80002,
         name: "Polygon Amoy",
         decimals: cereTokenDecimals,
         bridgeAddress: "0xf2686661e3297d737D7Ae709A433639151d11Ed6",
         erc20HandlerAddress: "0xCA8C0076262797f7f35E3874e7E208c9e394195E",
         rpcUrl:
-            "http://rpc.ankr.com/polygon_amoy/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
-        // Todo: replace to Amoy
-        blockExplorer: "https://mumbai.polygonscan.com/tx",
+            "https://rpc.ankr.com/polygon_amoy/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+        blockExplorer: "https://www.oklink.com/amoy/tx",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
         defaultGasPrice: 800,
@@ -90,20 +89,20 @@ window.__RUNTIME_CONFIG__ = {
       },
       {
         chainId: 0,
-        networkId: 5,
-        name: "Ethereum Goerli",
+        networkId: 11155111,
+        name: "Ethereum Sepolia",
         decimals: cereTokenDecimals,
-        rpcUrl: "https://goerli.infura.io/v3/0aca1499facc499bb195d2d437f78603",
-        blockExplorer: "https://goerli.etherscan.io/tx",
-        bridgeAddress: "0xa806cA3bD88F790744462cBC34c40EDd5b8dc2Dd",
-        erc20HandlerAddress: "0xf934Bfc8B5241b6C9e0DfC9A329AD687e79c5498",
+        rpcUrl: "https://rpc.ankr.com/ethereum_sepolia/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+        blockExplorer: "https://sepolia.etherscan.io/tx",
+        bridgeAddress: "0x310E5834F95964EAe7098D3dA9CD26c17cd83137",
+        erc20HandlerAddress: "0x56F464e1b2592b4B73CE2FcAe8e5de921A276167",
         type: "Ethereum",
         nativeTokenSymbol: "ETH",
         defaultGasPrice: 400,
         availableAsHomeNetwork: true,
         tokens: [
           {
-            address: "0xb8A59CEF67d12C5C75836aEfF1d97943F5A9F662",
+            address: "0x0086e7687F7326A3b77857F2870e185EC0EA5126",
             name: "CN",
             symbol: "CS",
             imageUri: "CEREIcon",

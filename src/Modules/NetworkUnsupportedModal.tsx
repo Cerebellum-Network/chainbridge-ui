@@ -61,7 +61,7 @@ const NetworkUnsupportedModal = () => {
   const { pathname } = useLocation();
 
   const [open, setOpen] = useState(false);
-  const ethereumNetworkIds = [1, 5, 137, 80001];
+  const ethereumNetworkIds = [1, 11155111, 137, 80002];
   const [supportedEthereumNetworks, setSupportedEthereumNetworks] = useState<
     string
   >("");
