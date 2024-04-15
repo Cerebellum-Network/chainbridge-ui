@@ -17,7 +17,7 @@ window.__RUNTIME_CONFIG__ = {
         bridgeAddress: "0xf2686661e3297d737D7Ae709A433639151d11Ed6",
         erc20HandlerAddress: "0xCA8C0076262797f7f35E3874e7E208c9e394195E",
         rpcUrl:
-            "https://rpc.ankr.com/polygon_amoy/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+            "https://polygon-amoy.infura.io/v3/c97784f674164ef7b58e6261d6b1c012",
         blockExplorer: "https://www.oklink.com/amoy/tx",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
@@ -28,8 +28,8 @@ window.__RUNTIME_CONFIG__ = {
         tokens: [
           {
             address: "0x8C7B1504d5E7Aa3e2E38353CFFd7526019b3cBBB",
-            name: "CN",
-            symbol: "CS",
+            name: "Devnet Cere",
+            symbol: "DEVCERE",
             imageUri: "CEREIcon",
             resourceId:
                 "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
@@ -94,17 +94,17 @@ window.__RUNTIME_CONFIG__ = {
         decimals: cereTokenDecimals,
         rpcUrl: "https://rpc.ankr.com/ethereum_sepolia/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
         blockExplorer: "https://sepolia.etherscan.io/tx",
-        bridgeAddress: "0x310E5834F95964EAe7098D3dA9CD26c17cd83137",
-        erc20HandlerAddress: "0x56F464e1b2592b4B73CE2FcAe8e5de921A276167",
+        bridgeAddress: "0xf2686661e3297d737D7Ae709A433639151d11Ed6",
+        erc20HandlerAddress: "0xCA8C0076262797f7f35E3874e7E208c9e394195E",
         type: "Ethereum",
         nativeTokenSymbol: "ETH",
         defaultGasPrice: 400,
         availableAsHomeNetwork: true,
         tokens: [
           {
-            address: "0x0086e7687F7326A3b77857F2870e185EC0EA5126",
-            name: "CN",
-            symbol: "CS",
+            address: "0x8C7B1504d5E7Aa3e2E38353CFFd7526019b3cBBB",
+            name: "Devnet Cere",
+            symbol: "DEVCERE",
             imageUri: "CEREIcon",
             resourceId:
                 "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",

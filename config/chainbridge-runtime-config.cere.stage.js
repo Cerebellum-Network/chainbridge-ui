@@ -1,5 +1,5 @@
-const cereTokenName = "CERE Network";
-const cereTokenSymbol = "CERE";
+const cereTokenName = "Testnet Cere";
+const cereTokenSymbol = "TST_CERE";
 const cereTokenDecimals = 10;
 
 window.__RUNTIME_CONFIG__ = {
@@ -27,8 +27,8 @@ window.__RUNTIME_CONFIG__ = {
         tokens: [
           {
             address: "0x6A077176E22c05a9607A32cdc9fE23Dd6db2A9Ca",
-            name: "CN",
-            symbol: "CS",
+            name: "Testnet CERE",
+            symbol: "TST_CERE",
             imageUri: "CEREIcon",
             resourceId:
                 "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
@@ -93,7 +93,7 @@ window.__RUNTIME_CONFIG__ = {
         decimals: cereTokenDecimals,
         rpcUrl: "https://rpc.ankr.com/ethereum_sepolia/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
         blockExplorer: "https://sepolia.etherscan.io/tx",
-        bridgeAddress: "0xD134be2c9d23a5e1d7b632633dDD832066D39dE8",
+        bridgeAddress: "0x120B0ba52DC11acA91E8d679eF127815Af0920CD",
         erc20HandlerAddress: "0x6A077176E22c05a9607A32cdc9fE23Dd6db2A9Ca",
         type: "Ethereum",
         nativeTokenSymbol: "ETH",
