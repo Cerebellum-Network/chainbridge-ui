@@ -3,6 +3,9 @@
 ## vNext
 ...
 
+## v0.28.0
+- Update config to use Polygon Amoy and Ethereum Sepolia
+
 ## v0.27.0
 - Added the ability to select a HomeChain for EVM-based networks.
 
