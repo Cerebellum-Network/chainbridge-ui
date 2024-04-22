@@ -1,0 +1,23 @@
+name: Release to QA
+on:
+  push:
+    branches:
+      - qa-cere
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    uses: Cerebellum-Network/reusable-workflows/.github/workflows/build-and-upload-static.yaml@master
+    with:
+      runs-on: '["self-hosted", "cere-network-xlarge"]'
+      build_container: 'node:16-buster'
+      deploy_container: 'ubuntu:20.04'
+      install_packages_command: 'cp .env.qa .env; sh ./scripts/copy-qa-config.sh; yarn install'
+      build_command: 'yarn build'
+      path_to_static_files_to_upload: 'build'
+    secrets:
+      NETWORK_AWS_ACCESS_KEY_ID: ${{ secrets.DEV_NETWORK_AWS_ACCESS_KEY_ID }}
+      NETWORK_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_NETWORK_AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME_QA }}
+      CF_DISTRIBUTION_ID: ${{ secrets.CF_DISTRIBUTION_ID_QA }}

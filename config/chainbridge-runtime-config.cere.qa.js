@@ -1,5 +1,5 @@
-const cereTokenName = "Testnet Cere";
-const cereTokenSymbol = "TST_CERE";
+const cereTokenName = "CERE Network";
+const cereTokenSymbol = "CERE";
 const cereTokenDecimals = 10;
 
 window.__RUNTIME_CONFIG__ = {
@@ -14,8 +14,8 @@ window.__RUNTIME_CONFIG__ = {
         networkId: 80002,
         name: "Polygon Amoy",
         decimals: cereTokenDecimals,
-        bridgeAddress: "0xD134be2c9d23a5e1d7b632633dDD832066D39dE8",
-        erc20HandlerAddress: "0x4bF13AF921eb468F6B0Fc19f9b41a2Fd7769D99C",
+        bridgeAddress: "0x0086e7687F7326A3b77857F2870e185EC0EA5126",
+        erc20HandlerAddress: "0x310E5834F95964EAe7098D3dA9CD26c17cd83137",
         rpcUrl: "https://polygon-amoy.infura.io/v3/c97784f674164ef7b58e6261d6b1c012",
         blockExplorer: "https://www.oklink.com/amoy/tx",
         type: "Ethereum",
@@ -26,9 +26,9 @@ window.__RUNTIME_CONFIG__ = {
         availableAsHomeNetwork: true,
         tokens: [
           {
-            address: "0x6A077176E22c05a9607A32cdc9fE23Dd6db2A9Ca",
+            address: "0xA8Dcf93a639E3A3834892DEE2E8f07270e7E58F7",
             name: "Testnet CERE",
-            symbol: "TST_CERE",
+            symbol: "TSTCERE",
             imageUri: "CEREIcon",
             resourceId:
                 "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
@@ -49,12 +49,12 @@ window.__RUNTIME_CONFIG__ = {
       {
         chainId: 1,
         networkId: 2,
-        name: "Cere Testnet",
+        name: "Cere Qanet",
         decimals: cereTokenDecimals,
-        rpcUrl: "wss://rpc.testnet.cere.network/ws",
+        rpcUrl: "wss://rpc.qanet.cere.network/ws",
         blockExplorer:
-            "https://explorer.cere.network/?rpc=wss%3A%2F%2Farchive.testnet.cere.network%2Fws#/explorer/query",
-        rpcFallbackUrls: ["wss://archive.testnet.cere.network/ws"],
+            "https://explorer.cere.network/?rpc=wss%3A%2F%2Farchive.qanet.cere.network%2Fws#/explorer/query",
+        rpcFallbackUrls: ["wss://archive.qanet.cere.network/ws"],
         type: "Substrate",
         nativeTokenSymbol: "CERE",
         availableAsHomeNetwork: true,
@@ -91,19 +91,19 @@ window.__RUNTIME_CONFIG__ = {
         networkId: 11155111,
         name: "Ethereum Sepolia",
         decimals: cereTokenDecimals,
-        rpcUrl: "https://rpc.ankr.com/ethereum_sepolia/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+        rpcUrl: "https://sepolia.infura.io/v3/0aca1499facc499bb195d2d437f78603",
         blockExplorer: "https://sepolia.etherscan.io/tx",
-        bridgeAddress: "0x120B0ba52DC11acA91E8d679eF127815Af0920CD",
-        erc20HandlerAddress: "0x6A077176E22c05a9607A32cdc9fE23Dd6db2A9Ca",
+        bridgeAddress: "0x310E5834F95964EAe7098D3dA9CD26c17cd83137",
+        erc20HandlerAddress: "0x56F464e1b2592b4B73CE2FcAe8e5de921A276167",
         type: "Ethereum",
         nativeTokenSymbol: "ETH",
         defaultGasPrice: 400,
         availableAsHomeNetwork: true,
         tokens: [
           {
-            address: "0x244A84580B96C49BDf552E18613227eF30951b04",
-            name: cereTokenName,
-            symbol: cereTokenSymbol,
+            address: "0x0086e7687F7326A3b77857F2870e185EC0EA5126",
+            name: "Testnet CERE",
+            symbol: "TSTCERE",
             imageUri: "CEREIcon",
             resourceId:
                 "0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00",
