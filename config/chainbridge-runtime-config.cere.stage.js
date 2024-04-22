@@ -16,7 +16,7 @@ window.__RUNTIME_CONFIG__ = {
         decimals: cereTokenDecimals,
         bridgeAddress: "0xD134be2c9d23a5e1d7b632633dDD832066D39dE8",
         erc20HandlerAddress: "0x4bF13AF921eb468F6B0Fc19f9b41a2Fd7769D99C",
-        rpcUrl: "https://rpc.ankr.com/polygon_amoy/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+        rpcUrl: "https://polygon-amoy.infura.io/v3/c97784f674164ef7b58e6261d6b1c012",
         blockExplorer: "https://www.oklink.com/amoy/tx",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",

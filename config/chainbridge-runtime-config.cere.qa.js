@@ -16,8 +16,7 @@ window.__RUNTIME_CONFIG__ = {
         decimals: cereTokenDecimals,
         bridgeAddress: "0x0086e7687F7326A3b77857F2870e185EC0EA5126",
         erc20HandlerAddress: "0x310E5834F95964EAe7098D3dA9CD26c17cd83137",
-        rpcUrl:
-            "https://rpc.ankr.com/polygon_amoy/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+        rpcUrl: "https://polygon-amoy.infura.io/v3/c97784f674164ef7b58e6261d6b1c012",
         blockExplorer: "https://www.oklink.com/amoy/tx",
         type: "Ethereum",
         nativeTokenSymbol: "MATIC",
@@ -92,7 +91,7 @@ window.__RUNTIME_CONFIG__ = {
         networkId: 11155111,
         name: "Ethereum Sepolia",
         decimals: cereTokenDecimals,
-        rpcUrl: "https://rpc.ankr.com/ethereum_sepolia/c3f39efa809ec60e8a5f1d035689162b51c1d9eb39233314e7725556faf7f503",
+        rpcUrl: "https://sepolia.infura.io/v3/0aca1499facc499bb195d2d437f78603",
         blockExplorer: "https://sepolia.etherscan.io/tx",
         bridgeAddress: "0x310E5834F95964EAe7098D3dA9CD26c17cd83137",
         erc20HandlerAddress: "0x56F464e1b2592b4B73CE2FcAe8e5de921A276167",
